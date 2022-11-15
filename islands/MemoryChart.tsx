@@ -11,9 +11,6 @@ export default function MemoryChart() {
   // Number of points to display on the chart
   const displaySize = 50;
   const label: number[] = [];
-  const [ws, setWS] = useState(new StandardWebSocketClient(
-    "ws://0.0.0.0:3000",
-  ));
 
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
@@ -104,6 +101,9 @@ export default function MemoryChart() {
 
   function startWebsocket(lineChart: any, barChart: any){
     console.log('here');
+    const ws = new StandardWebSocketClient(
+      "ws://127.0.0.1:3000",
+    )
     ws.on("open", function () {
       setInterval(() => {
         ws.send("give me data");
@@ -129,12 +129,9 @@ export default function MemoryChart() {
       lineChart.update();
       barChart.update();
     });
-    setWS(ws);
+    return () => ws.removeAllListeners();
   }
 
-  function closeWebSocket(){
-    ws.removeAllListeners();
-  }
 
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
@@ -149,13 +146,18 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
-    document.getElementById('startWS')?.addEventListener('click', e => startWebsocket(lineChart, barChart));
-    document.getElementById('closeWS')?.addEventListener('click', e => closeWebSocket());
+    document.getElementById('startWS')?.addEventListener('click', e => {
+      const end = startWebsocket(lineChart, barChart);
+      document.getElementById('closeWS')?.addEventListener('click', e => {
+        end();
+      })
+    });
+    document
     return () => {
       lineChart.destroy();
       barChart.destroy();
     };
-  }, [ws]);
+  }, []);
 
 
   function toggleGraph() {
@@ -182,7 +184,7 @@ export default function MemoryChart() {
       </div>
       <button id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
-      <RecordData ws={ws}/>
+      <RecordData />
     </div>
   );
 }
