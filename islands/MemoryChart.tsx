@@ -4,12 +4,15 @@ import { useEffect, useState } from "preact/hooks";
 import { StandardWebSocketClient } from "websocket";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "./RecordData.tsx";
+import { createWebSocket } from "https://deno.land/std@0.92.0/ws/mod.ts";
 
 
 export default function MemoryChart() {
   // Number of points to display on the chart
   const displaySize = 50;
   const label: number[] = [];
+  const [ws, setWS] = useState({});
+
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
   }
@@ -97,30 +100,15 @@ export default function MemoryChart() {
     },
   };
 
-
-  const ws = new StandardWebSocketClient(
-    "ws://127.0.0.1:3000",
-  );
-  
-  useEffect(() => {
-    ws.on("open", function () {
+  function startWebsocket(port: number, lineChart: any, barChart: any){
+    const ws = new StandardWebSocketClient(
+      "ws://127.0.0.1:3000",
+    );
+      ws.on("open", function () {
       setInterval(() => {
         ws.send("give me data");
       }, 1000);
     });
-    const ctx1 = document.getElementById("myLineChart");
-    const ctx2 = document.getElementById("myBarChart");
-    const lineChart = new chartjs.Chart(ctx1, {
-      type: "line",
-      data: chartStyle,
-      options: chartOptions,
-    });
-    const barChart = new chartjs.Chart(ctx2, {
-      type: "bar",
-      data: chartStyle,
-      options: chartOptions,
-    });
-
     ws.addListener("message", function (e: MessageEvent) {
       console.log('added');
       const mem = JSON.parse(e.data);
@@ -141,12 +129,30 @@ export default function MemoryChart() {
       lineChart.update();
       barChart.update();
     });
+    setWS(ws);
+  }
 
+  function closeWebSocket(ws: StandardWebSocketClient){
+    ws.removeAllListeners();
+    ws.close(3000, 'bye');
+  }
+
+  useEffect(() => {
+    const ctx1 = document.getElementById("myLineChart");
+    const ctx2 = document.getElementById("myBarChart");
+    const lineChart = new chartjs.Chart(ctx1, {
+      type: "line",
+      data: chartStyle,
+      options: chartOptions,
+    });
+    const barChart = new chartjs.Chart(ctx2, {
+      type: "bar",
+      data: chartStyle,
+      options: chartOptions,
+    });
     return () => {
-      ws.removeAllListeners();
       lineChart.destroy();
       barChart.destroy();
-      ws.close(3000, 'bye');
     };
   }, []);
 
@@ -173,6 +179,7 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
+      <button onClick={e => createWebSocket}>Start WS</button>
       <RecordData ws={ws}/>
     </div>
   );
