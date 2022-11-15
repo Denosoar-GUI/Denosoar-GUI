@@ -1,7 +1,7 @@
 /** @jsx */
 
 import { useEffect, useState } from "preact/hooks";
-import { StandardWebSocketClient } from "websocket";
+import { StandardWebSocketClient, WebSocketClient } from "websocket";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "./RecordData.tsx";
 
@@ -100,6 +100,8 @@ export default function MemoryChart() {
     },
   };
 
+
+
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
     const ctx2 = document.getElementById("myBarChart");
@@ -114,6 +116,7 @@ export default function MemoryChart() {
       options: chartOptions,
     });
     if(inUse){
+      
       try {
         const ws = new StandardWebSocketClient(
           `ws://127.0.0.1:${port}`,
@@ -124,6 +127,18 @@ export default function MemoryChart() {
           }, 1000);
           setIntervalID(myInterval);
         });
+
+        // Add functionality to close the websocket
+        const closeWS = document.getElementById('closeWS');
+        const end = () => {
+          ws.removeAllListeners();
+          ws.close(3000, 'hi');
+          console.log(intervalID);
+          clearInterval(intervalID);
+          closeWS?.removeEventListener('click', end);
+        }
+        closeWS?.addEventListener('click', end);
+
         ws.addListener("message", function (e: MessageEvent) {
           console.log('added');
           const mem = JSON.parse(e.data);
@@ -141,15 +156,6 @@ export default function MemoryChart() {
               data
             ]
           }
-          const closeWS = document.getElementById('closeWS');
-          function end() {
-            ws.removeAllListeners();
-            ws.close(3000, 'hi');
-            console.log(intervalID);
-            clearInterval(intervalID);
-            closeWS?.removeEventListener('click', end);
-          }
-          closeWS?.addEventListener('click', end)
           lineChart.update();
           barChart.update();
         });
