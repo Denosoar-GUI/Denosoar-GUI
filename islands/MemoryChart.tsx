@@ -144,6 +144,7 @@ export default function MemoryChart() {
           function end() {
             ws.removeAllListeners();
             ws.close(3000, 'hi');
+            console.log(intervalID);
             clearInterval(intervalID);
             setIntervalID(0);
             closeWS?.removeEventListener('click', end);
