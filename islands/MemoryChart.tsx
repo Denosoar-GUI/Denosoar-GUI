@@ -116,7 +116,6 @@ export default function MemoryChart() {
       options: chartOptions,
     });
     if(inUse){
-      
       try {
         const ws = new StandardWebSocketClient(
           `ws://127.0.0.1:${port}`,
@@ -126,6 +125,7 @@ export default function MemoryChart() {
             ws.send("give me data");
           }, 1000);
           setIntervalID(myInterval);
+          console.log(myInterval);
         });
 
         // Add functionality to close the websocket
@@ -133,7 +133,6 @@ export default function MemoryChart() {
         const end = () => {
           ws.removeAllListeners();
           ws.close(3000, 'hi');
-          console.log(intervalID);
           clearInterval(intervalID);
           closeWS?.removeEventListener('click', end);
         }
