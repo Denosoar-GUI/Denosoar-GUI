@@ -101,7 +101,6 @@ export default function MemoryChart() {
 
   function startWebsocket(lineChart: any, barChart: any, endWS: HTMLElement | null){
     if(inUse) {
-      console.log('im in use');
       return;
     }
     console.log('should log false: ', inUse)
@@ -140,8 +139,6 @@ export default function MemoryChart() {
     function callback(){
       console.log('in callback for endWS');
       if(inUse){
-        console.log('should log true: ', inUse)
-        setInUse(false);
         ws.removeAllListeners();
         ws.close(1000, 'hi');
         alert('stopped recording');
