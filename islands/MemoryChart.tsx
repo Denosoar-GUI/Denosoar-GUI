@@ -5,9 +5,6 @@ import { StandardWebSocketClient } from "websocket";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "./RecordData.tsx";
 
-interface MemoryProps {
-  memory: MemoryElement;
-}
 
 export default function MemoryChart() {
   // Number of points to display on the chart
@@ -100,14 +97,11 @@ export default function MemoryChart() {
     },
   };
 
-  try {
-    const ws = new StandardWebSocketClient(
+
+  const ws = new StandardWebSocketClient(
     "ws://127.0.0.1:3000",
   );
-  } catch (err) {
-    console.log(err); 
-  }
-
+  
   useEffect(() => {
     ws.on("open", function () {
       setInterval(() => {
