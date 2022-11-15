@@ -11,7 +11,9 @@ export default function MemoryChart() {
   // Number of points to display on the chart
   const displaySize = 50;
   const label: number[] = [];
-  const [ws, setWS] = useState({});
+  const [ws, setWS] = useState(new StandardWebSocketClient(
+    "ws://127.0.0.1:3000",
+  ));
 
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
@@ -101,10 +103,8 @@ export default function MemoryChart() {
   };
 
   function startWebsocket(port: number, lineChart: any, barChart: any){
-    const ws = new StandardWebSocketClient(
-      "ws://127.0.0.1:3000",
-    );
-      ws.on("open", function () {
+    console.log('here');
+    ws.on("open", function () {
       setInterval(() => {
         ws.send("give me data");
       }, 1000);
@@ -132,9 +132,8 @@ export default function MemoryChart() {
     setWS(ws);
   }
 
-  function closeWebSocket(ws: StandardWebSocketClient){
+  function closeWebSocket(){
     ws.removeAllListeners();
-    ws.close(3000, 'bye');
   }
 
   useEffect(() => {
@@ -180,6 +179,7 @@ export default function MemoryChart() {
         <canvas id="myBarChart"></canvas>
       </div>
       <button onClick={e => startWebsocket}>Start WS</button>
+      <button onClick={e => closeWebSocket}>Close WS</button>
       <RecordData ws={ws}/>
     </div>
   );
