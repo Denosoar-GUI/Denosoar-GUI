@@ -151,6 +151,7 @@ export default function MemoryChart() {
         });
       } catch(err) {
         console.log('failed');
+        setInUse(false);
       }
     }
     return () => {
@@ -161,6 +162,9 @@ export default function MemoryChart() {
 
   function handleChange(e: any) {
     setPort(e.target.value);
+  }
+  function handleStart(e: any) {
+    setInUse(true);
   }
 
   function toggleGraph() {
@@ -186,7 +190,7 @@ export default function MemoryChart() {
         <canvas id="myBarChart"></canvas>
       </div>
       <input type="text" placeholder="port#" onChange={handleChange}/>
-      <button id ="startWS">Start WS</button>
+      <button onClick={handleStart} id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
       <RecordData />
     </div>
