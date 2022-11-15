@@ -142,7 +142,7 @@ export default function MemoryChart() {
           const closeWS = document.getElementById('closeWS');
           function end() {
             ws.removeAllListeners();
-            ws.close(100, 'hi');
+            ws.close(3000, 'hi');
             closeWS?.removeEventListener('click', end);
           }
           closeWS?.addEventListener('click', end)
