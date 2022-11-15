@@ -105,7 +105,7 @@ export default function MemoryChart() {
     }
     console.log('should log false: ', inUse)
     setInUse(true);
-    console.log(inUse);
+    console.log('should log true', inUse);
     const ws = new StandardWebSocketClient(
       "ws://127.0.0.1:3000",
     )
