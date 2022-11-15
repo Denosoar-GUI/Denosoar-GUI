@@ -179,7 +179,7 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <button onClick={e => createWebSocket}>Start WS</button>
+      <button onClick={e => startWebsocket}>Start WS</button>
       <RecordData ws={ws}/>
     </div>
   );
