@@ -99,55 +99,6 @@ export default function MemoryChart() {
     },
   };
 
-  function startWebsocket(lineChart: any, barChart: any, endWS: HTMLElement | null){
-    if(inUse) {
-      return;
-    }
-    console.log('should log false: ', inUse)
-    setInUse(true);
-    console.log('should log true', inUse);
-    const ws = new StandardWebSocketClient(
-      "ws://127.0.0.1:3000",
-    )
-    ws.on("open", function () {
-      setInterval(() => {
-        ws.send("give me data");
-      }, 1000);
-    });
-    ws.addListener("message", function (e: MessageEvent) {
-      console.log('added');
-      const mem = JSON.parse(e.data);
-      lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
-      barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
-      for(let i = 0; i < 5; i++){
-        let data;
-        if(i === 0) data = mem.rss;
-        else if(i === 1) data = mem.committed/1000;
-        else if(i === 2) data = mem.heapTotal/1000;
-        else if(i === 3) data = mem.heapUsed/1000;
-        else if(i === 4) data = mem.external/1000;
-        chartStyle.datasets[i].data = [
-          ...chartStyle.datasets[i].data.slice(1),
-          data
-        ]
-      }
-      lineChart.update();
-      barChart.update();
-    });
-    console.log(endWS);
-    endWS?.addEventListener('click', callback)
-    function callback(){
-      console.log('in callback for endWS');
-      if(inUse){
-        ws.removeAllListeners();
-        ws.close(1000, 'hi');
-        alert('stopped recording');
-        endWS?.removeEventListener('click', callback);
-      }
-    }
-  }
-
-
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
     const ctx2 = document.getElementById("myBarChart");
@@ -161,19 +112,52 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
-    const startWS = document.getElementById('startWS');
-    const endWS = document.getElementById('closeWS');
-    startWS?.addEventListener('click', e => startWebsocket(lineChart, barChart, endWS));
+    if(inUse){
+      try {
+        const ws = new StandardWebSocketClient(
+          `ws://127.0.0.1:${port}`,
+        )
+        ws.on("open", function () {
+          setInterval(() => {
+            ws.send("give me data");
+          }, 1000);
+        });
+        ws.addListener("message", function (e: MessageEvent) {
+          console.log('added');
+          const mem = JSON.parse(e.data);
+          lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
+          barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
+          for(let i = 0; i < 5; i++){
+            let data;
+            if(i === 0) data = mem.rss;
+            else if(i === 1) data = mem.committed/1000;
+            else if(i === 2) data = mem.heapTotal/1000;
+            else if(i === 3) data = mem.heapUsed/1000;
+            else if(i === 4) data = mem.external/1000;
+            chartStyle.datasets[i].data = [
+              ...chartStyle.datasets[i].data.slice(1),
+              data
+            ]
+          }
+          const closeWS = document.getElementById('closeWS');
+          function end() {
+            ws.removeAllListeners();
+            ws.close(100, 'hi');
+            closeWS?.removeEventListener('click', end);
+          }
+          closeWS?.addEventListener('click', end)
+          lineChart.update();
+          barChart.update();
+        });
+      } catch(err) {
+        console.log('failed');
+      }
+    }
     return () => {
       lineChart.destroy();
       barChart.destroy();
     };
-  }, []);
-
-  useEffect(() => {
-    const startWS = document.getElementById('startWS');
-    const endWS = document.getElementById('endWS');
-  }, [inUse])
+  }, [inUse]);
 
   function handleChange(e: any) {
     setPort(e.target.value);
