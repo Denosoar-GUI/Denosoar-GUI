@@ -168,7 +168,6 @@ export default function MemoryChart() {
   }, [inUse]);
 
   function handleChange(e: any) {
-    console.log(port);
     setPort(e.target.value);
   }
 
@@ -188,6 +187,7 @@ export default function MemoryChart() {
       document.getElementById("bar")?.classList.remove("hidden");
     }
   }
+
   return (
     <div class="block" id="chartContainer">
       <h1>Memory Usage</h1>
@@ -199,7 +199,7 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <input type="text" placeholder="port#" onChange={e => handleChange(e)}/>
+      <input type="text" placeholder="port#" onChange={e => console.log(e.target)}/>
       <button onClick={handleStart} id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
       <RecordData />
