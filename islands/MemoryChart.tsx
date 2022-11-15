@@ -102,33 +102,14 @@ export default function MemoryChart() {
     },
   };
 
-  function startWebsocket(port: number, lineChart: any, barChart: any){
+  function startWebsocket(){
     console.log('here');
     ws.on("open", function () {
       setInterval(() => {
         ws.send("give me data");
       }, 1000);
     });
-    ws.addListener("message", function (e: MessageEvent) {
-      console.log('added');
-      const mem = JSON.parse(e.data);
-      lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
-      barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
-      for(let i = 0; i < 5; i++){
-        let data;
-        if(i === 0) data = mem.rss;
-        else if(i === 1) data = mem.committed/1000;
-        else if(i === 2) data = mem.heapTotal/1000;
-        else if(i === 3) data = mem.heapUsed/1000;
-        else if(i === 4) data = mem.external/1000;
-        chartStyle.datasets[i].data = [
-          ...chartStyle.datasets[i].data.slice(1),
-          data
-        ]
-      }
-      lineChart.update();
-      barChart.update();
-    });
+ 
     setWS(ws);
   }
 
@@ -149,11 +130,31 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
+    if(ws) ws.addListener("message", function (e: MessageEvent) {
+      console.log('added');
+      const mem = JSON.parse(e.data);
+      lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
+      barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
+      for(let i = 0; i < 5; i++){
+        let data;
+        if(i === 0) data = mem.rss;
+        else if(i === 1) data = mem.committed/1000;
+        else if(i === 2) data = mem.heapTotal/1000;
+        else if(i === 3) data = mem.heapUsed/1000;
+        else if(i === 4) data = mem.external/1000;
+        chartStyle.datasets[i].data = [
+          ...chartStyle.datasets[i].data.slice(1),
+          data
+        ]
+      }
+      lineChart.update();
+      barChart.update();
+    });
     return () => {
       lineChart.destroy();
       barChart.destroy();
     };
-  }, []);
+  }, [ws]);
 
 
   function toggleGraph() {
