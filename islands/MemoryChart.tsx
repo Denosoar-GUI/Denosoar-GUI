@@ -11,6 +11,7 @@ export default function MemoryChart() {
   const label: number[] = [];
   const [port, setPort] = useState('');
   const [inUse, setInUse] = useState(false);
+  const [intervalID, setIntervalID] = useState(0);
 
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
@@ -118,9 +119,9 @@ export default function MemoryChart() {
           `ws://127.0.0.1:${port}`,
         )
         ws.on("open", function () {
-          setInterval(() => {
+          setIntervalID(setInterval(() => {
             ws.send("give me data");
-          }, 1000);
+          }, 1000));
         });
         ws.addListener("message", function (e: MessageEvent) {
           console.log('added');
@@ -143,7 +144,8 @@ export default function MemoryChart() {
           function end() {
             ws.removeAllListeners();
             ws.close(3000, 'hi');
-            clearInterval();
+            clearInterval(intervalID);
+            setIntervalID(0);
             closeWS?.removeEventListener('click', end);
           }
           closeWS?.addEventListener('click', end)
