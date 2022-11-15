@@ -161,6 +161,7 @@ export default function MemoryChart() {
   }, [inUse]);
 
   function handleChange(e: any) {
+    console.log(port);
     setPort(e.target.value);
   }
   function handleStart(e: any) {
