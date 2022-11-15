@@ -131,7 +131,9 @@ export default function MemoryChart() {
     });
     endWS?.addEventListener('click', callback)
     function callback(){
+      console.log('here');
       if(inUse){
+        console.log('here');
         setInUse(false);
         ws.removeAllListeners();
         ws.close(1000, 'hi');
