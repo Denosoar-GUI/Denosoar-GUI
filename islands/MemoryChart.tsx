@@ -133,6 +133,7 @@ export default function MemoryChart() {
           ws.removeAllListeners();
           ws.close(3000, 'hi');
           clearInterval(myInterval);
+          setInUse(false);
           closeWS?.removeEventListener('click', end);
         }
         closeWS?.addEventListener('click', end);
