@@ -12,6 +12,7 @@ export default function MemoryChart() {
   const displaySize = 50;
   const label: number[] = [];
   const [port, setPort] = useState('');
+  const [inUse, setInUse] = useState(false);
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
   }
@@ -99,9 +100,8 @@ export default function MemoryChart() {
     },
   };
 
-  function startWebsocket(lineChart: any, barChart: any){
-    console.log('here');
-
+  function startWebsocket(lineChart: any, barChart: any, endWS: HTMLElement | null){
+    if(inUse) return;
     const ws = new StandardWebSocketClient(
       "ws://127.0.0.1:3000",
     )
@@ -130,7 +130,14 @@ export default function MemoryChart() {
       lineChart.update();
       barChart.update();
     });
-    return () => ws.removeAllListeners();
+    endWS?.addEventListener('click', callback)
+    function callback(){
+      if(inUse){
+        ws.removeAllListeners();
+        alert('stopped recording');
+        endWS?.removeEventListener('click', callback);
+      }
+    }
   }
 
 
@@ -147,22 +154,24 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
-    document.getElementById('startWS')?.addEventListener('click', e => {
-      const end = startWebsocket(lineChart, barChart);
-      document.getElementById('closeWS')?.addEventListener('click', e => {
-        end();
-      })
-    });
-    document
+    const startWS = document.getElementById('startWS');
+    const endWS = document.getElementById('closeWS');
+    startWS?.addEventListener('click', e => startWebsocket(lineChart, barChart, endWS));
     return () => {
       lineChart.destroy();
       barChart.destroy();
     };
   }, []);
 
+  useEffect(() => {
+    const startWS = document.getElementById('startWS');
+    const endWS = document.getElementById('endWS');
+  }, [inUse])
+
   function handleChange(e: any) {
     setPort(e.target.value);
   }
+
   function toggleGraph() {
     const line = document.getElementById("line")?.classList.contains("hidden");
     // console.log(line, "hi");
