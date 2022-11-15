@@ -191,7 +191,7 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <input type="text" placeholder="port#" onChange={e => handleChange}/>
+      <input type="text" placeholder="port#" onChange={e => handleChange(e)}/>
       <button onClick={handleStart} id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
       <RecordData />
