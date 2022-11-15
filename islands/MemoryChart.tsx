@@ -100,6 +100,7 @@ export default function MemoryChart() {
 
   function startWebsocket(lineChart: any, barChart: any, endWS: HTMLElement | null){
     if(inUse) return;
+    console.log('should log false: ', inUse)
     setInUse(true);
     const ws = new StandardWebSocketClient(
       "ws://127.0.0.1:3000",
@@ -129,12 +130,12 @@ export default function MemoryChart() {
       lineChart.update();
       barChart.update();
     });
+    console.log(endWS);
     endWS?.addEventListener('click', callback)
     function callback(){
-      console.log('here');
+      console.log('in callback for endWS');
       if(inUse){
-        console.log('here');
-        setInUse(false);
+        console.log('should log true: ', inUse)
         ws.removeAllListeners();
         ws.close(1000, 'hi');
         alert('stopped recording');
