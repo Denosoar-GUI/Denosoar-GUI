@@ -5,10 +5,6 @@ import { StandardWebSocketClient } from "websocket";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "./RecordData.tsx";
 
-interface MemoryProps {
-  memory: MemoryElement;
-}
-
 export default function MemoryChart() {
   // Number of points to display on the chart
   const displaySize = 50;
