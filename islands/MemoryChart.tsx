@@ -134,6 +134,7 @@ export default function MemoryChart() {
     function callback(){
       if(inUse){
         ws.removeAllListeners();
+        ws.close(1000, 'hi');
         alert('stopped recording');
         endWS?.removeEventListener('click', callback);
       }
