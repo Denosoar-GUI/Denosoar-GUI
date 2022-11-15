@@ -11,7 +11,7 @@ export default function MemoryChart() {
   // Number of points to display on the chart
   const displaySize = 50;
   const label: number[] = [];
-
+  const [port, setPort] = useState('');
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
   }
@@ -101,6 +101,7 @@ export default function MemoryChart() {
 
   function startWebsocket(lineChart: any, barChart: any){
     console.log('here');
+
     const ws = new StandardWebSocketClient(
       "ws://127.0.0.1:3000",
     )
@@ -159,7 +160,9 @@ export default function MemoryChart() {
     };
   }, []);
 
-
+  function handleChange(e: any) {
+    setPort(e.target.value);
+  }
   function toggleGraph() {
     const line = document.getElementById("line")?.classList.contains("hidden");
     // console.log(line, "hi");
@@ -182,6 +185,7 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
+      <input type="text" placeholder="port#" onChange={handleChange}/>
       <button id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
       <RecordData />
