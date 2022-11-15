@@ -99,10 +99,17 @@ export default function MemoryChart() {
     },
   };
 
+
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
+    const ctx2 = document.getElementById("myBarChart");
     const lineChart = new chartjs.Chart(ctx1, {
       type: "line",
+      data: chartStyle,
+      options: chartOptions,
+    });
+    const barChart = new chartjs.Chart(ctx2, {
+      type: "bar",
       data: chartStyle,
       options: chartOptions,
     });
@@ -133,6 +140,7 @@ export default function MemoryChart() {
           console.log('added');
           const mem = JSON.parse(e.data);
           lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
+          barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
           for(let i = 0; i < 5; i++){
             let data;
             if(i === 0) data = mem.rss;
@@ -146,6 +154,7 @@ export default function MemoryChart() {
             ]
           }
           lineChart.update();
+          barChart.update();
         });
       } catch(err) {
         console.log('failed');
@@ -154,6 +163,7 @@ export default function MemoryChart() {
     }
     return () => {
       lineChart.destroy();
+      barChart.destroy();
     };
   }, [inUse]);
 
@@ -184,6 +194,10 @@ export default function MemoryChart() {
       <div id="line">
         <button class="" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
         <canvas id="myLineChart"></canvas>
+      </div>
+      <div id="bar" class="hidden">
+        <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
+        <canvas id="myBarChart"></canvas>
       </div>
       <input type="text" placeholder="port#" onChange={e => handleChange(e)}/>
       <button onClick={handleStart} id ="startWS">Start WS</button>
