@@ -4,8 +4,6 @@ import { useEffect, useState } from "preact/hooks";
 import { StandardWebSocketClient } from "websocket";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "./RecordData.tsx";
-import { createWebSocket } from "https://deno.land/std@0.92.0/ws/mod.ts";
-
 
 export default function MemoryChart() {
   // Number of points to display on the chart
@@ -102,6 +100,7 @@ export default function MemoryChart() {
 
   function startWebsocket(lineChart: any, barChart: any, endWS: HTMLElement | null){
     if(inUse) return;
+    setInUse(true);
     const ws = new StandardWebSocketClient(
       "ws://127.0.0.1:3000",
     )
@@ -133,6 +132,7 @@ export default function MemoryChart() {
     endWS?.addEventListener('click', callback)
     function callback(){
       if(inUse){
+        setInUse(false);
         ws.removeAllListeners();
         ws.close(1000, 'hi');
         alert('stopped recording');
