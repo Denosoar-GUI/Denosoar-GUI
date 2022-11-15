@@ -11,6 +11,7 @@ export default function MemoryChart() {
   const label: number[] = [];
   const [port, setPort] = useState('');
   const [inUse, setInUse] = useState(false);
+
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
   }
@@ -99,9 +100,13 @@ export default function MemoryChart() {
   };
 
   function startWebsocket(lineChart: any, barChart: any, endWS: HTMLElement | null){
-    if(inUse) return;
+    if(inUse) {
+      console.log('im in use');
+      return;
+    }
     console.log('should log false: ', inUse)
     setInUse(true);
+    console.log(inUse);
     const ws = new StandardWebSocketClient(
       "ws://127.0.0.1:3000",
     )
@@ -136,6 +141,7 @@ export default function MemoryChart() {
       console.log('in callback for endWS');
       if(inUse){
         console.log('should log true: ', inUse)
+        setInUse(false);
         ws.removeAllListeners();
         ws.close(1000, 'hi');
         alert('stopped recording');
