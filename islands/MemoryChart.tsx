@@ -102,14 +102,33 @@ export default function MemoryChart() {
     },
   };
 
-  function startWebsocket(){
+  function startWebsocket(lineChart: any, barChart: any){
     console.log('here');
     ws.on("open", function () {
       setInterval(() => {
         ws.send("give me data");
       }, 1000);
     });
- 
+    ws.addListener("message", function (e: MessageEvent) {
+      console.log('added');
+      const mem = JSON.parse(e.data);
+      lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
+      barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
+      for(let i = 0; i < 5; i++){
+        let data;
+        if(i === 0) data = mem.rss;
+        else if(i === 1) data = mem.committed/1000;
+        else if(i === 2) data = mem.heapTotal/1000;
+        else if(i === 3) data = mem.heapUsed/1000;
+        else if(i === 4) data = mem.external/1000;
+        chartStyle.datasets[i].data = [
+          ...chartStyle.datasets[i].data.slice(1),
+          data
+        ]
+      }
+      lineChart.update();
+      barChart.update();
+    });
     setWS(ws);
   }
 
@@ -130,26 +149,8 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
-    if(ws) ws.addListener("message", function (e: MessageEvent) {
-      console.log('added');
-      const mem = JSON.parse(e.data);
-      lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
-      barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
-      for(let i = 0; i < 5; i++){
-        let data;
-        if(i === 0) data = mem.rss;
-        else if(i === 1) data = mem.committed/1000;
-        else if(i === 2) data = mem.heapTotal/1000;
-        else if(i === 3) data = mem.heapUsed/1000;
-        else if(i === 4) data = mem.external/1000;
-        chartStyle.datasets[i].data = [
-          ...chartStyle.datasets[i].data.slice(1),
-          data
-        ]
-      }
-      lineChart.update();
-      barChart.update();
-    });
+    document.getElementById('startWS')?.addEventListener('click', e => startWebsocket(lineChart, barChart));
+    document.getElementById('closeWS')?.addEventListener('click', e => closeWebSocket());
     return () => {
       lineChart.destroy();
       barChart.destroy();
@@ -179,8 +180,8 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <button onClick={e => startWebsocket}>Start WS</button>
-      <button onClick={e => closeWebSocket}>Close WS</button>
+      <button id ="startWS">Start WS</button>
+      <button id="closeWS">Close WS</button>
       <RecordData ws={ws}/>
     </div>
   );
