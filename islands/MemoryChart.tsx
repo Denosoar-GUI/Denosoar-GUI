@@ -100,9 +100,13 @@ export default function MemoryChart() {
     },
   };
 
-  const ws = new StandardWebSocketClient(
+  try {
+    const ws = new StandardWebSocketClient(
     "ws://127.0.0.1:3000",
   );
+  } catch (err) {
+    console.log(err); 
+  }
 
   useEffect(() => {
     ws.on("open", function () {
