@@ -12,7 +12,7 @@ export default function MemoryChart() {
   const displaySize = 50;
   const label: number[] = [];
   const [ws, setWS] = useState(new StandardWebSocketClient(
-    "ws://127.0.0.1:3000",
+    "ws://0.0.0.0:3000",
   ));
 
   for (let i = 0; i < displaySize; i++) {
