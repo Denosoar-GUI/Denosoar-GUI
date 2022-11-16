@@ -45,7 +45,7 @@ export default function MemoryChart() {
         tension: 0.5,
       },
       {
-        label: "Committed Heap (kB)",
+        label: "Committed Heap",
         data: [...startArray],
         backgroundColor: [
           "rgba(0, 20, 20, .2)",
@@ -105,8 +105,37 @@ export default function MemoryChart() {
         ticks: {
           stepSize: 1000,
         },
+        title: {
+          display: true,
+          text: 'Memory Usage (kb)',
+          align: 'center',
+          padding: 16,
+          font: {
+            size: 24
+          }
+        }
       },
+      xAxes: {
+        title: {
+          display: true,
+          text: "Test",
+          align: 'center',
+          padding: 12,
+          font: {
+            size: 24
+          }
+        }
+      }
     },
+    animation: false,
+    elements: {
+      line: {
+
+      },
+      point: {
+        radius: 2
+      }
+    }
   };
 
 
@@ -184,23 +213,23 @@ export default function MemoryChart() {
     const line = document.getElementById("line")?.classList.contains("hidden");
     // console.log(line, "hi");
     if (line) {
-      document.getElementById("bar")?.setAttribute("class", "hidden");
+      document.getElementById("bar")?.classList.add("class", "hidden");
       document.getElementById("line")?.classList.remove("hidden");
     } else {
-      document.getElementById("line")?.setAttribute("class", "hidden");
+      document.getElementById("line")?.classList.add("class", "hidden");
       document.getElementById("bar")?.classList.remove("hidden");
     }
   }
 
   return (
-    <div class="block" id="chartContainer">
-      <h1>Memory Usage</h1>
-      <div id="line">
-        <button class="" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
+    <div class="w-4/5 mx-auto min-w-800" id="chartContainer">
+      <h1 class="mx-auto text-4xl left-3">Memory Usage</h1>
+      <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
+      <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
         <canvas id="myLineChart"></canvas>
       </div>
-      <div id="bar" class="hidden">
-        <button class={``} id="lineBtn" onClick={toggleGraph}>Line Chart</button>
+      <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
+      <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
       <label htmlFor="port">Localhost Port: </label>
