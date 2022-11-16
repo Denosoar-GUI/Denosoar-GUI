@@ -154,7 +154,7 @@ export default function MemoryChart() {
           barChart.update();
         };
         ws.onerror = () => {
-          ws.close();
+          ws.close(1000, 'bye');
           setInUse(false);
           setError(`There was an error in connecting this websocket. Please verify the following and try again:\n1)Your server has the denosoar init(port) function included in its entrypoint file.\n2)Your server is currently running.\n3)The port with which you initialized our application is the same port you are now attempting to access.`)
         };
@@ -169,7 +169,6 @@ export default function MemoryChart() {
         }
         closeWS?.addEventListener('click', end);
       } catch(err) {
-        console.log('im here');
         setError(err.message);
         setInUse(false);
       }
@@ -204,9 +203,10 @@ export default function MemoryChart() {
         <button class={``} id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <input id="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
-      <button onClick={handleStart} id ="startWS">Start WS</button>
-      <button id="closeWS">Close WS</button>
+      <label htmlFor="port">Localhost Port: </label>
+      <input id="port" name="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
+      <button onClick={handleStart} id ="startWS">Connect</button>
+      <button id="closeWS">Disconnect</button>
       <div>{error}</div>
       <RecordData />
     </div>
