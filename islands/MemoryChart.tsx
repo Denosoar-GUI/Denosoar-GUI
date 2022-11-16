@@ -156,6 +156,9 @@ export default function MemoryChart() {
       try {
         let myInterval: number;
         const ws = new WebSocket(`ws://127.0.0.1:${port}/wss`);
+        ws.onopen = () => {
+          setError('');
+        }
         ws.onmessage = (e: MessageEvent) => {
           const mem = JSON.parse(e.data);
           lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
