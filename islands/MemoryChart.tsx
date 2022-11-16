@@ -45,7 +45,7 @@ export default function MemoryChart() {
         tension: 0.5,
       },
       {
-        label: "Committed Heap (kB)",
+        label: "Committed Heap",
         data: [...startArray],
         backgroundColor: [
           "rgba(0, 20, 20, .2)",
@@ -105,8 +105,37 @@ export default function MemoryChart() {
         ticks: {
           stepSize: 1000,
         },
+        title: {
+          display: true,
+          text: 'Memory Usage (kb)',
+          align: 'center',
+          padding: 16,
+          font: {
+            size: 24
+          }
+        }
       },
+      xAxes: {
+        title: {
+          display: true,
+          text: "Test",
+          align: 'center',
+          padding: 12,
+          font: {
+            size: 24
+          }
+        }
+      }
     },
+    animation: false,
+    elements: {
+      line: {
+
+      },
+      point: {
+        radius: 2
+      }
+    }
   };
 
 
@@ -126,15 +155,8 @@ export default function MemoryChart() {
     if(inUse){
       try {
         let myInterval: number;
-        const ws = new WebSocket(`ws://127.0.0.1:${port}`);
-        ws.onopen = () => {
-          setError('');
-          myInterval = setInterval(() => {
-            ws.send('give me data');
-          }, 1000);
-        };
+        const ws = new WebSocket(`ws://127.0.0.1:${port}/wss`);
         ws.onmessage = (e: MessageEvent) => {
-          console.log('added');
           const mem = JSON.parse(e.data);
           lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
           barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
@@ -184,31 +206,33 @@ export default function MemoryChart() {
     const line = document.getElementById("line")?.classList.contains("hidden");
     // console.log(line, "hi");
     if (line) {
-      document.getElementById("bar")?.setAttribute("class", "hidden");
+      document.getElementById("bar")?.classList.add("class", "hidden");
       document.getElementById("line")?.classList.remove("hidden");
     } else {
-      document.getElementById("line")?.setAttribute("class", "hidden");
+      document.getElementById("line")?.classList.add("class", "hidden");
       document.getElementById("bar")?.classList.remove("hidden");
     }
   }
 
   return (
-    <div class="block" id="chartContainer">
-      <h1>Memory Usage</h1>
-      <div id="line">
-        <button class="" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
+    <div class="w-4/5 mx-auto min-w-[800] max-w-6xl" id="chartContainer">
+      <h1 class="mx-auto text-4xl left-3">Memory Usage</h1>
+      <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
+      <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
         <canvas id="myLineChart"></canvas>
       </div>
-      <div id="bar" class="hidden">
-        <button class={``} id="lineBtn" onClick={toggleGraph}>Line Chart</button>
+      <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
+      <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <label htmlFor="port">Localhost Port: </label>
-      <input id="port" name="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
-      <button onClick={handleStart} id ="startWS">Connect</button>
-      <button id="closeWS">Disconnect</button>
+      <div class="flex justify-between">
+        <label htmlFor="port">Localhost Port: </label>
+        <input id="port" name="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
+        <button onClick={handleStart} id ="startWS">Connect</button>
+        <button id="closeWS">Disconnect</button>
+      </div>
       <div>{error}</div>
-      <RecordData />
+      <RecordData port={port}/>
     </div>
   );
 }
