@@ -4,5 +4,6 @@ body {
   }
 
   h1 {
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
+    color: blue;
   }

@@ -155,15 +155,8 @@ export default function MemoryChart() {
     if(inUse){
       try {
         let myInterval: number;
-        const ws = new WebSocket(`ws://127.0.0.1:${port}`);
-        ws.onopen = () => {
-          setError('');
-          myInterval = setInterval(() => {
-            ws.send('give me data');
-          }, 1000);
-        };
+        const ws = new WebSocket(`ws://127.0.0.1:${port}/wss`);
         ws.onmessage = (e: MessageEvent) => {
-          console.log('added');
           const mem = JSON.parse(e.data);
           lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
           barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
@@ -222,7 +215,7 @@ export default function MemoryChart() {
   }
 
   return (
-    <div class="w-4/5 mx-auto min-w-800" id="chartContainer">
+    <div class="w-4/5 mx-auto min-w-[800] max-w-6xl" id="chartContainer">
       <h1 class="mx-auto text-4xl left-3">Memory Usage</h1>
       <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
       <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
@@ -232,12 +225,14 @@ export default function MemoryChart() {
       <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <label htmlFor="port">Localhost Port: </label>
-      <input id="port" name="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
-      <button onClick={handleStart} id ="startWS">Connect</button>
-      <button id="closeWS">Disconnect</button>
+      <div class="flex justify-between">
+        <label htmlFor="port">Localhost Port: </label>
+        <input id="port" name="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
+        <button onClick={handleStart} id ="startWS">Connect</button>
+        <button id="closeWS">Disconnect</button>
+      </div>
       <div>{error}</div>
-      <RecordData />
+      <RecordData port={port}/>
     </div>
   );
 }
