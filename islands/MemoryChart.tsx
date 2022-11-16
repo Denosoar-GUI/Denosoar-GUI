@@ -1,7 +1,6 @@
 /** @jsx */
 
 import { useEffect, useState } from "preact/hooks";
-import { StandardWebSocketClient } from "websocket";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "./RecordData.tsx";
 
@@ -11,9 +10,10 @@ export default function MemoryChart() {
   const label: number[] = [];
   const [port, setPort] = useState<string>('');
   const [inUse, setInUse] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  const handleChange = (e: Event) => {
-    setPort(e.target?.value);
+  const handleChange = (e: any) => {
+    setPort(e.target.value);
     console.log(port);
   }
 
@@ -126,27 +126,14 @@ export default function MemoryChart() {
     if(inUse){
       try {
         let myInterval: number;
-        const ws = new StandardWebSocketClient(
-          `ws://127.0.0.1:${port}`,
-        )
-        ws.on("open", function async () {
+        const ws = new WebSocket(`ws://127.0.0.1:${port}`);
+        ws.onopen = () => {
+          setError('');
           myInterval = setInterval(() => {
-            ws.send("give me data");
+            ws.send('give me data');
           }, 1000);
-        });
-
-        // Add functionality to close the websocket
-        const closeWS = document.getElementById('closeWS');
-        const end = () => {
-          ws.removeAllListeners();
-          ws.close(3000, 'hi');
-          clearInterval(myInterval);
-          setInUse(false);
-          closeWS?.removeEventListener('click', end);
-        }
-        closeWS?.addEventListener('click', end);
-
-        ws.addListener("message", function (e: MessageEvent) {
+        };
+        ws.onmessage = (e: MessageEvent) => {
           console.log('added');
           const mem = JSON.parse(e.data);
           lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
@@ -165,9 +152,25 @@ export default function MemoryChart() {
           }
           lineChart.update();
           barChart.update();
-        });
+        };
+        ws.onerror = () => {
+          ws.close();
+          setInUse(false);
+          setError(`There was an error in connecting this websocket. Please verify the following and try again:\n1)Your server has the denosoar init(port) function included in its entrypoint file.\n2)Your server is currently running.\n3)The port with which you initialized our application is the same port you are now attempting to access.`)
+        };
+        ws.onclose = () => console.log('closed');
+        // Add button functionality to close the websocket
+        const closeWS = document.getElementById('closeWS');
+        const end = () => {
+          ws.close();
+          clearInterval(myInterval);
+          setInUse(false);
+          closeWS?.removeEventListener('click', end);
+        }
+        closeWS?.addEventListener('click', end);
       } catch(err) {
-        console.log('failed');
+        console.log('im here');
+        setError(err.message);
         setInUse(false);
       }
     }
@@ -198,12 +201,13 @@ export default function MemoryChart() {
         <canvas id="myLineChart"></canvas>
       </div>
       <div id="bar" class="hidden">
-        <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
+        <button class={``} id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <input type="text" placeholder="port#" onInput={e => handleChange(e)}/>
+      <input id="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
       <button onClick={handleStart} id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
+      <div>{error}</div>
       <RecordData />
     </div>
   );
