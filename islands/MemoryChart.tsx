@@ -9,8 +9,18 @@ export default function MemoryChart() {
   // Number of points to display on the chart
   const displaySize = 50;
   const label: number[] = [];
-  const [port, setPort] = useState('');
-  const [inUse, setInUse] = useState(false);
+  const [port, setPort] = useState<string>('');
+  const [inUse, setInUse] = useState<boolean>(false);
+
+  const handleChange = (e: Event) => {
+    setPort(e.target?.value);
+    console.log(port);
+  }
+
+  const handleStart = () => {
+    if(inUse) return;
+    else setInUse(true);
+  }
 
   for (let i = 0; i < displaySize; i++) {
     label.push(i - displaySize);
@@ -167,14 +177,6 @@ export default function MemoryChart() {
     };
   }, [inUse]);
 
-  function handleChange(e: any) {
-    setPort(e.target.value);
-  }
-
-  function handleStart() {
-    if(inUse) return;
-    else setInUse(true);
-  }
 
   function toggleGraph() {
     const line = document.getElementById("line")?.classList.contains("hidden");
@@ -199,7 +201,7 @@ export default function MemoryChart() {
         <button class="" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <input type="text" placeholder="port#" onChange={e => handleChange(e)}/>
+      <input type="text" placeholder="port#" onInput={e => handleChange(e)}/>
       <button onClick={handleStart} id ="startWS">Start WS</button>
       <button id="closeWS">Close WS</button>
       <RecordData />
