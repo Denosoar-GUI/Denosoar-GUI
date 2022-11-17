@@ -7,3 +7,10 @@ body {
     /* font-family: 'Courier New', Courier, monospace; */
     /* color: blue; */
   }
+
+  #error-msg {
+    background-color: lightgoldenrodyellow;
+    border: 1px solid orange;
+    display: hidden;
+    left: -15%
+  }
