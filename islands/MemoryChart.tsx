@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "preact/hooks";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
-import RecordData from "./RecordData.tsx";
+import RecordData from "../components/RecordData.tsx";
 
 export default function MemoryChart() {
   // Number of points to display on the chart
@@ -118,7 +118,7 @@ export default function MemoryChart() {
       xAxes: {
         title: {
           display: true,
-          text: "Test",
+          text: "Data Collections",
           align: 'center',
           padding: 12,
           font: {
@@ -127,13 +127,13 @@ export default function MemoryChart() {
         }
       }
     },
-    animation: false,
+    animation: true,
     elements: {
       line: {
 
       },
       point: {
-        radius: 2
+        radius: 1
       }
     }
   };
@@ -156,6 +156,9 @@ export default function MemoryChart() {
       try {
         let myInterval: number;
         const ws = new WebSocket(`ws://127.0.0.1:${port}/wss`);
+        ws.onopen = () => {
+          setError('');
+        }
         ws.onmessage = (e: MessageEvent) => {
           const mem = JSON.parse(e.data);
           lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
@@ -215,24 +218,28 @@ export default function MemoryChart() {
   }
 
   return (
-    <div class="w-4/5 mx-auto min-w-[800] max-w-6xl" id="chartContainer">
-      <h1 class="mx-auto text-4xl left-3">Memory Usage</h1>
+    <div class="w-4/5 mx-auto min-w-800 max-w-6xl pt-10 pb-10" id="chartContainer">
+      <div class="justify-center items-center flex flex-col">
+        <div>
+          <label htmlFor="port">Localhost Port: </label>
+          <input id="port" class="p-2 border-2" name="port" type="text" placeholder="Enter port number" onInput={e => handleChange(e)}/>
+          <button onClick={handleStart} class='text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-6 mt-4 p-2 rounded shadow-2xl' id ="startWS">Connect</button>
+          <button class='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-6 mt-4 p-2 rounded' id="closeWS">Disconnect</button>
+        </div>
+      </div>
+      <h1 class="mx-auto text-4xl left-3 pt-10 pb-5 text-center">Memory Usage</h1>
       <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
-      <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
-        <canvas id="myLineChart"></canvas>
+        <button class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6" id="barBtn" onClick={toggleGraph}>Bar Chart</button>
+          <canvas id="myLineChart"></canvas>
       </div>
       <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
-      <button class="border border-gray-400 bg-yellow-400 ml-6 rounded p-2" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
+        <button class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6" id="lineBtn" onClick={toggleGraph}>Line Chart</button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <div class="flex justify-between">
-        <label htmlFor="port">Localhost Port: </label>
-        <input id="port" name="port" type="text" placeholder="port#" onInput={e => handleChange(e)}/>
-        <button onClick={handleStart} id ="startWS">Connect</button>
-        <button id="closeWS">Disconnect</button>
+      <div class="justify-center items-center flex flex-col">
+        <RecordData port={port}/>
+        <div id="error-msg"class="text-red-500">{error}</div>
       </div>
-      <div>{error}</div>
-      <RecordData port={port}/>
     </div>
   );
 }

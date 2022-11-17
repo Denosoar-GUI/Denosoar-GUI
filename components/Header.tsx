@@ -18,7 +18,7 @@ export default function Header() {
    
     <nav class="p-5 bg-white shadow md:flex md:items-center md:justify-between ">
       <div class ='md:flex md:items-center font-mono bg-gray-300 flex w-full justify-between p-5'>
-        <div class="flex justify-between items-center">
+        <div class="flex justify-around items-center">
           <span class="text-2xl cursor-pointer"> 
             <a 
               href="/" 
@@ -26,11 +26,11 @@ export default function Header() {
               class="mx-4 my-6 md:my-0"> 
               <img
               src="/super-deno.png"
-              class="h-10 inline border-1 border-solid border-white w-12 h-12 rounded-full"
+              class="h-10 inline border-1 border-solid border-white h-32 w-32 rounded-full"
             />
             </a>
           </span>
-          <h1 class="mx-4 text-2xl ">Denosoar</h1>
+          <h1 class="mx-4 text-8xl mx-auto">Denosoar</h1>
           <span class="text-3xl cursor-pointer mx-2 md:hidden block absolute  right-10">
             <IconMenu name = "menu" onClick={e => Menu()}></IconMenu>
           </span>
