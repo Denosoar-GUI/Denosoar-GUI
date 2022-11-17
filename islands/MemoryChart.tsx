@@ -161,8 +161,7 @@ export default function MemoryChart() {
         }
         ws.onmessage = (e: MessageEvent) => {
           const mem = JSON.parse(e.data);
-          lineChart.data.labels = lineChart.data.labels.map((x: number) => x + 1);
-          barChart.data.labels = barChart.data.labels.map((x: number) => x + 1);
+          chartStyle.labels = chartStyle.labels.map((x: number) => x + 1);
           for(let i = 0; i < 5; i++){
             let data;
             if(i === 0) data = mem.rss;
