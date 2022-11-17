@@ -100,14 +100,14 @@ export default function MemoryChart() {
   const chartOptions = {
     scales: {
       yAxes: {
-        suggestedmax: 6000,
+        suggestedmax: 1000,
         suggestedmin: 0,
         ticks: {
-          stepSize: 1000,
+          stepSize: 100,
         },
         title: {
           display: true,
-          text: 'Memory Usage (kb)',
+          text: 'Memory Usage (Mb)',
           align: 'center',
           padding: 16,
           font: {
@@ -164,11 +164,11 @@ export default function MemoryChart() {
           chartStyle.labels = chartStyle.labels.map((x: number) => x + 1);
           for(let i = 0; i < 5; i++){
             let data;
-            if(i === 0) data = mem.rss;
-            else if(i === 1) data = mem.committed/1000;
-            else if(i === 2) data = mem.heapTotal/1000;
-            else if(i === 3) data = mem.heapUsed/1000;
-            else if(i === 4) data = mem.external/1000;
+            if(i === 0) data = mem.rss/1000;
+            else if(i === 1) data = mem.committed/1000000;
+            else if(i === 2) data = mem.heapTotal/1000000;
+            else if(i === 3) data = mem.heapUsed/1000000;
+            else if(i === 4) data = mem.external/1000000;
             chartStyle.datasets[i].data = [
               ...chartStyle.datasets[i].data.slice(1),
               data
