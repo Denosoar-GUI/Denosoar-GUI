@@ -18,6 +18,13 @@ export default {
       },
       width: {
         '600': '600px',
+        '130xl': '130%'
+      },
+      left: {
+        'm15p': "-50px"
+      },
+      height:{
+        '155xl': "155%"
       },
       minWidth: {
         '800': '800px'
