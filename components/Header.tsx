@@ -1,6 +1,21 @@
+import { JSX } from "preact";
+import { ComponentChildren } from "preact";
+import { useEffect, useState } from "preact/hooks";
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import IconMenu from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/menu.tsx"
 export default function Header() {
+
+  function Menu(e){
+    console.log(e)
+    let list = document.querySelector('ul');
+    e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') , list.classList.add('opacity-100')) :( e.name = "menu" ,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
+  }
+    
+ 
+ 
+
   return (
+   
     <nav class="p-5 bg-white shadow md:flex md:items-center md:justify-between ">
       <div class ='md:flex md:items-center font-mono bg-gray-300 flex w-full justify-between p-5'>
         <div class="flex justify-between items-center">
@@ -17,7 +32,7 @@ export default function Header() {
           </span>
           <h1 class="mx-4 text-2xl ">Denosoar</h1>
           <span class="text-3xl cursor-pointer mx-2 md:hidden block absolute  right-10">
-            <IconMenu name = "menu" onClick=""></IconMenu>
+            <IconMenu name = "menu" onClick={e => Menu()}></IconMenu>
           </span>
         </div>
         <ul class=" md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 ">
@@ -58,5 +73,7 @@ export default function Header() {
         </ul>
       </div>
     </nav>
+
+    
   );
 }
