@@ -100,10 +100,10 @@ export default function MemoryChart() {
   const chartOptions = {
     scales: {
       yAxes: {
-        suggestedmax: 1000,
+        suggestedmax: 100,
         suggestedmin: 0,
         ticks: {
-          stepSize: 100,
+          stepSize: 5,
         },
         title: {
           display: true,
