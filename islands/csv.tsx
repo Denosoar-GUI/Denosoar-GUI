@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'preact/hooks'
-import CsvChart from './CSVChart.tsx';
+import CsvChart from './CsvChart.tsx';
 import readCSV from "../utils/readCSV.ts";
 
 export default function UploadChart(){
