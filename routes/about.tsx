@@ -1,12 +1,46 @@
-import Header from '../islands/Header.tsx';
+import Header from "../islands/Header.tsx";
+import Bio from "../components/Bio.tsx";
 import UploadChart from '../islands/csv.tsx';
 
-export default function About(){
+export default function About() {
+  const names: string[][] = [
+    [
+      "Katie Angelopoulos",
+      "https://github.com/kangelopoulos",
+      "https://www.linkedin.com/in/katharine-angelopoulos-8a69a6174/",
+      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+      'super-deno.png'
+    ],
+    [
+      "David Russo",
+      "https://github.com/RussoDavid",
+      "https://www.linkedin.com/in/david-russo-742a7735/",
+      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+      "/super-deno.png"
+    ],
+    [
+      "Mohammed Sebbagh",
+      "https://github.com/moha99ed",
+      "https://www.linkedin.com/in/mohammed-sebbagh/",
+      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+      "/super-deno.png"
+    ],
+    [
+      "Ethan Liu",
+      "https://github.com/eliu080893",
+      "https://www.linkedin.com/in/ethan-liu-0808/",
+      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+      "/super-deno.png"
+    ],
+  ];
 
-    const names: string[][]= [['Katie Angelopoulos','https://github.com/kangelopoulos' ], [ 'David Russo', 'https://github.com/RussoDavid'],['Mohammed Sebbagh', 'https://github.com/moha99ed'],['Ethan Liu', 'https://github.com/eliu080893'] ]
-    
+  const bios: any[] = [];
 
-    return(
+  for (let i = 0; i < names.length; i++) {
+    bios.push(<Bio count={i} name={names[i][0]} github={names[i][1]} linkedin={names[i][2]} description={names[i][3]} image={names[i][4]}/>)
+  }
+
+  return (
     <div>
         <Header />
        <h1 class='ml-4 text-6xl mt-4 mb-4'>About Denosoar</h1>
@@ -19,7 +53,8 @@ export default function About(){
             /> </a>
             </li>)}
         </ul>
+        
     </div>
     )
-     
-}  
+    
+}
