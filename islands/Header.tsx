@@ -13,7 +13,7 @@ export default function Header() {
   useEffect(() => {
     let lastKnownWidth = 0;
     let ticking = false;
-    const doSomething = (width) => {
+    const doSomething = (width: any) => {
       console.log(width);
       if (width > 768) {
         setNavOpen(true);
@@ -21,7 +21,7 @@ export default function Header() {
         setNavOpen(false);
       }
     };
-    const onResize = (e) => {
+    const onResize = (e: any) => {
       lastKnownWidth = ref.current.innerWidth;
       if (!ticking) {
         ref.current.requestAnimationFrame(() => {
@@ -76,7 +76,7 @@ export default function Header() {
         {navOpen 
         ? (
           <div class={tw`${NAV_STYLE}`} >
-            <div class={tw`${NAV_LINKS_STYLE} flex items-center ...`}>
+            <div class={tw`${NAV_LINKS_STYLE} flex items-center`}>
               <a 
                 href="/" 
                 class={tw`${LINK_STYLE } mr-4 `}
@@ -88,7 +88,11 @@ export default function Header() {
               <a 
                 href="/docs" 
                 class={tw`${LINK_STYLE } mr-4 `}
-                >Docs</a>                
+                >Docs</a>
+                 <a 
+                href="/csv" 
+                class={tw`${LINK_STYLE } mr-4`}
+                >Upload Chart</a>                
              <a
                 href="https://github.com/oslabs-beta/denosoar"
                 target="_blank"

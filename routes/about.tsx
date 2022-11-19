@@ -1,4 +1,5 @@
 import Header from '../islands/Header.tsx';
+import UploadChart from '../islands/csv.tsx';
 
 export default function About(){
 
@@ -18,8 +19,7 @@ export default function About(){
             /> </a>
             </li>)}
         </ul>
-        
     </div>
     )
-    
-}
+     
+}  
