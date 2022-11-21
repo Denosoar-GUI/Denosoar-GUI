@@ -4,7 +4,14 @@
   },
   "importMap": "./import_map.json",
   "compilerOptions": {
+    "allowJs": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "jsxImportSource": "preact",
+    "lib": [
+      "dom",
+      "deno.ns",
+      "deno.unstable"
+    ],
+    "strict": true
   }
 }
