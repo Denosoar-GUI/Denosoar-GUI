@@ -3,6 +3,7 @@
 import { useEffect, useState } from "preact/hooks";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "../components/RecordData.tsx";
+import styles from "../utils/styles.ts";
 
 export default function MemoryChart() {
   // Number of points to display on the chart
@@ -44,114 +45,9 @@ export default function MemoryChart() {
 
   const startArray = new Array(displaySize).fill(0);
 
-  const chartStyle = {
-    labels: label,
-    datasets: [
-      {
-        label: "RSS",
-        data: [...startArray],
-        backgroundColor: [
-          "rgba(105, 0, 132, .2)",
-        ],
-        borderColor: [
-          "rgba(200, 99, 132, .7)",
-        ],
-        fill: true,
-        borderWidth: 1,
-        tension: 0.5,
-      },
-      {
-        label: "Committed Heap",
-        data: [...startArray],
-        backgroundColor: [
-          "rgba(0, 20, 20, .2)",
-        ],
-        borderColor: [
-          "rgba(0, 30, 20, .7)",
-        ],
-        fill: true,
-        borderWidth: 1,
-      },
-      {
-        label: "Heap Total",
-        data: [...startArray],
-        backgroundColor: [
-          "rgba(0, 137, 132, .2)",
-        ],
-        borderColor: [
-          "rgba(0, 10, 130, .7)",
-        ],
-        fill: true,
-        borderWidth: 1,
-      },
-      {
-        label: "Heap Used",
-        data: [...startArray],
-        backgroundColor: [
-          "rgba(0, 255, 0, .2)",
-        ],
-        borderColor: [
-          "rgba(0, 153, 0, .7)",
-        ],
-        fill: true,
-        borderWidth: 1,
-        tension: 0.5,
-      },
-      {
-        label: "External",
-        data: [...startArray],
-        backgroundColor: [
-          "rgba(255, 102, 78, .2)",
-        ],
-        borderColor: [
-          "rgba(255, 0, 127, .7)",
-        ],
-        fill: true,
-        borderWidth: 1,
-        tension: 0.5,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    scales: {
-      yAxes: {
-        suggestedmax: 100,
-        suggestedmin: 0,
-        ticks: {
-          stepSize: 5,
-        },
-        title: {
-          display: true,
-          text: "Memory Usage (Mb)",
-          align: "center",
-          padding: 16,
-          font: {
-            size: 24,
-          },
-        },
-      },
-      xAxes: {
-        title: {
-          display: true,
-          text: "Data Points",
-          align: "center",
-          padding: 12,
-          font: {
-            size: 24,
-          },
-        },
-      },
-    },
-    animation: true,
-    elements: {
-      line: {},
-      point: {
-        radius: 1,
-      },
-    },
-  };
-
+  const { chartStyle, chartOptions } = styles(label, startArray, startArray, startArray, startArray, startArray);
+  chartOptions.scales.xAxes.title.text = "Data Points";
+  
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
     const ctx2 = document.getElementById("myBarChart");
