@@ -1,6 +1,6 @@
-export default function readCSV(file: File){
+export default async function readCSV(file: File): Promise<[string, number[]][]>{
   const data: [string, number[]][] = [];
-  try{
+  const res: [string,number[]][] = await new Promise((resolve) => {
     const reader = new FileReader();
     let lines: string[];
     reader.readAsText(file);
@@ -16,9 +16,8 @@ export default function readCSV(file: File){
           data[i][1].push(Number(e));
         })
       })
+      resolve(data);
     }
-    return data;
-  } catch (err) {
-    return err.message;
-  }
+  })
+  return res;
 }
