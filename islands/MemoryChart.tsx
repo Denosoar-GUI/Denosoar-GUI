@@ -82,11 +82,11 @@ export default function MemoryChart() {
         // }
           for (let i = 0; i < 5; i++) {
             let data;
-            if (i === 0) data = mem.rss / 1000;
-            else if (i === 1) data = mem.committed / 1000000;
-            else if (i === 2) data = mem.heapTotal / 1000000;
-            else if (i === 3) data = mem.heapUsed / 1000000;
-            else if (i === 4) data = mem.external / 1000000;
+            if (i === 0) data = mem.rss;
+            else if (i === 1) data = mem.committed / 1000;
+            else if (i === 2) data = mem.heapTotal / 1000;
+            else if (i === 3) data = mem.heapUsed / 1000;
+            else if (i === 4) data = mem.external / 1000;
             console.log('before', chartStyle.datasets[i].data)
             chartStyle.datasets[i].data.push(data)
             
