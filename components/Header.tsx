@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "preact/hooks";
 import Nav from '../islands/Nav.tsx';
 import Logo from './Logo.tsx';
 
