@@ -44,7 +44,7 @@ export default function About() {
         <Header />
         <section
           id="about-product"
-          class=" flex bg-yellow-200 w-full h-144 justify-center"
+          class=" flex bg-gray-100 w-full h-144 justify-center"
         >
           <h1 class="ml-4 text-6xl mt-4 mb-4">About Denosoar</h1>
           <p class="mr-4 ml-4 text-lg">
@@ -57,7 +57,7 @@ export default function About() {
   
         <section
           id="about-team"
-          class="bg-blue-200 w-full py-5"
+          class="bg-gray-300 w-full py-5"
         >
           {bios}
         </section>
