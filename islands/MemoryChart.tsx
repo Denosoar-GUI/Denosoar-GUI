@@ -4,7 +4,6 @@ import { useEffect, useState } from "preact/hooks";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "../components/RecordData.tsx";
 import styles from "../utils/styles.ts";
-
 export default function MemoryChart() {
   // Number of points to display on the chart
   
@@ -189,13 +188,13 @@ export default function MemoryChart() {
 
           <input
         id="frequency"
-        class="p-2 border-2 w-20"
+        class="p-2 border-2"
         type="number"
         placeholder="1000"
         onInput={(e) => handleFreqChange(e)}
       >
       </input>
-      <button id="change_freq" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-3 mt-4 p-2 rounded shadow-2xl" onClick={handleTiming}>
+      <button id="change_freq" class="bg-green-500" onClick={handleTiming}>
         Sampling Frequency
       </button>
         </div>
@@ -212,7 +211,7 @@ export default function MemoryChart() {
           id="barBtn"
           onClick={toggleGraph}
         >
-          View Bar Chart
+          Bar Chart
         </button>
         <canvas id="myLineChart"></canvas>
       </div>
@@ -222,7 +221,7 @@ export default function MemoryChart() {
           id="lineBtn"
           onClick={toggleGraph}
         >
-          View Line Chart
+          Line Chart
         </button>
         <canvas id="myBarChart"></canvas>
       </div>
