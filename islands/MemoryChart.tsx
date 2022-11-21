@@ -6,7 +6,7 @@ import RecordData from "../components/RecordData.tsx";
 import styles from "../utils/styles.ts";
 export default function MemoryChart() {
   // Number of points to display on the chart
-  const displaySize = 30;
+  
   const label: number[] = [];
   const [port, setPort] = useState<string>("");
   const [inUse, setInUse] = useState<boolean>(false);
@@ -38,12 +38,12 @@ export default function MemoryChart() {
     console.log(test);
   };
 
-  for (let i = 0; i < displaySize; i++) {
-    label.push(i - displaySize);
-  }
 
-  const startArray = new Array(displaySize).fill(0);
-  const { chartStyle, chartOptions } = styles(label, startArray, startArray, startArray, startArray, startArray)
+  
+
+  const { chartStyle, chartOptions } = styles(label);
+  chartOptions.scales.xAxes.title.text = "Data Points";
+  
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
     const ctx2 = document.getElementById("myBarChart");
@@ -57,6 +57,8 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
+    const containerBody = document.getElementById('containerBody');
+    
     if (inUse) {
       try {
         let myInterval: number;
@@ -66,7 +68,18 @@ export default function MemoryChart() {
         };
         ws.onmessage = (e: MessageEvent) => {
           const mem = JSON.parse(e.data);
-          chartStyle.labels = chartStyle.labels.map((x: number) => x + 1);
+          chartStyle.labels.push(chartStyle.labels.length);
+
+          let displaySize = 30;
+        //   for (let i = 0; i < displaySize; i++) {
+        //   label.push(i - displaySize);
+        // }    
+        console.log('display size', displaySize)
+        // if(displaySize > 30){
+        //   const newWidth = 700 + ((displaySize) * 30)
+        //   containerBody.style.width = `${newWidth}px`
+
+        // }
           for (let i = 0; i < 5; i++) {
             let data;
             if (i === 0) data = mem.rss / 1000;
@@ -74,11 +87,17 @@ export default function MemoryChart() {
             else if (i === 2) data = mem.heapTotal / 1000000;
             else if (i === 3) data = mem.heapUsed / 1000000;
             else if (i === 4) data = mem.external / 1000000;
-            chartStyle.datasets[i].data = [
-              ...chartStyle.datasets[i].data.slice(1),
-              data,
-            ];
+            console.log('before', chartStyle.datasets[i].data)
+            chartStyle.datasets[i].data.push(data)
+            
+            // chartStyle.datasets[i].data = [
+            //   ...chartStyle.datasets[i].data, // removed .slice(1) from this line
+            //   data,
+            // ];
+            displaySize = chartStyle.datasets[i].data.length
+            console.log('after', displaySize)
           }
+          const startArray = new Array(displaySize).fill(0);
           lineChart.update();
           barChart.update();
         };
@@ -137,7 +156,7 @@ export default function MemoryChart() {
     >
       <div class="justify-center items-center flex flex-col">
         <div class="relative">
-          <label htmlFor="port">Localhost Port:</label>
+          <label htmlFor="port"></label><br/>
           <input
             id="port"
             class="p-2 border-2"
@@ -165,11 +184,9 @@ export default function MemoryChart() {
             onClick={() => setError("")}
           >
             {error}
-          </div>
-        </div>
-      </div>
+          </div><br/><br/>
 
-      <input
+          <input
         id="frequency"
         class="p-2 border-2"
         type="number"
@@ -180,6 +197,10 @@ export default function MemoryChart() {
       <button id="change_freq" class="bg-green-500" onClick={handleTiming}>
         Sampling Frequency
       </button>
+        </div>
+      </div>
+
+      
 
       <h1 class="mx-auto text-4xl left-3 pt-10 pb-5 text-center">
         Memory Usage
