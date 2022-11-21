@@ -82,11 +82,11 @@ export default function MemoryChart() {
         // }
           for (let i = 0; i < 5; i++) {
             let data;
-            if (i === 0) data = mem.rss / 1000;
-            else if (i === 1) data = mem.committed / 1000000;
-            else if (i === 2) data = mem.heapTotal / 1000000;
-            else if (i === 3) data = mem.heapUsed / 1000000;
-            else if (i === 4) data = mem.external / 1000000;
+            if (i === 0) data = mem.rss;
+            else if (i === 1) data = mem.committed / 1000;
+            else if (i === 2) data = mem.heapTotal / 1000;
+            else if (i === 3) data = mem.heapUsed / 1000;
+            else if (i === 4) data = mem.external / 1000;
             console.log('before', chartStyle.datasets[i].data)
             chartStyle.datasets[i].data.push(data)
             
@@ -194,7 +194,10 @@ export default function MemoryChart() {
         onInput={(e) => handleFreqChange(e)}
       >
       </input>
-      <button id="change_freq" class="bg-green-500" onClick={handleTiming}>
+      <button 
+        id="change_freq" 
+        class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-6 mt-4 p-2 rounded shadow-2xl"
+        onClick={handleTiming}>
         Sampling Frequency
       </button>
         </div>

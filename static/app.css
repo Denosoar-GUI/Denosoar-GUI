@@ -34,4 +34,9 @@ body {
     border-radius: 10px;
     padding: 10px;
   }
+  /* #csv {
+    display: flex;
+    justify-content: center;
+    width: 750px;
+  } */
    /*class='h-full flex items-center justify-center border-dotted border-2 border-red-200 rounded m-10 p-10'
