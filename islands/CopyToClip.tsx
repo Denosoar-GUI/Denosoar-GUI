@@ -2,37 +2,36 @@ import { JSX } from "preact";
 import { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import IconCopy from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/copy.tsx"
-import IconChecks from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/checks.tsx"
+import IconCopy from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/copy.tsx";
+import IconChecks from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/checks.tsx";
 export default function CopyToClip(
-  props: {children: ComponentChildren},
+  props: { children: ComponentChildren },
 ) {
-    const [copied, setCopied] = useState(false)
-    async function handleClick () {
-        if (props.children === undefined || props.children === null){
-            return;
-        }
-
-        try {
-            await navigator.clipboard.writeText(props.children.toString());
-            setCopied(true);
-
-        }catch (error){
-            setCopied(false);
-            console.log((error && error.message) || "copy failed!")
-        }
+  const [copied, setCopied] = useState(false);
+  async function handleClick() {
+    if (props.children === undefined || props.children === null) {
+      return;
     }
-    useEffect(() => {
-        if (!copied){
-            return;
-        }
-        const timer = setTimeout(() => {
-            setCopied(false)
-        }, 2000);
-        return () => clearTimeout(timer)
-    }, [copied]);
 
-return (
+    try {
+      await navigator.clipboard.writeText(props.children.toString());
+      setCopied(true);
+    } catch (error) {
+      setCopied(false);
+      console.log((error && error.message) || "copy failed!");
+    }
+  }
+  useEffect(() => {
+    if (!copied) {
+      return;
+    }
+    const timer = setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [copied]);
+
+  return (
     <div class="bg(gray-800) rounded text-white flex items-center">
       <pre class="overflow-x-auto flex-1 py-2 px-4">
         {props.children}

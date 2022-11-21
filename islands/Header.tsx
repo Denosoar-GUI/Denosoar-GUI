@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "preact/hooks";
 import { tw } from "twind";
 export default function Header() {
@@ -13,15 +12,15 @@ export default function Header() {
   useEffect(() => {
     let lastKnownWidth = 0;
     let ticking = false;
-    const doSomething = (width) => {
-      console.log(width);
+    const doSomething = (width: any) => {
+      // console.log(width);
       if (width > 768) {
         setNavOpen(true);
       } else {
         setNavOpen(false);
       }
     };
-    const onResize = (e) => {
+    const onResize = (e: any) => {
       lastKnownWidth = ref.current.innerWidth;
       if (!ticking) {
         ref.current.requestAnimationFrame(() => {
@@ -39,25 +38,23 @@ export default function Header() {
   }, []);
 
   return (
-
     <div class="bg-gray-300">
       <nav class="flex items-center justify-between flex-wrap p-6 max-w-screen-md mx-auto">
         <div class="flex items-center flex-shrink-0 text-black mr-6">
-              <a href="/" 
-                class="mx-4 my-6 md:my-0"> 
-                <img
-                src="/super-deno.png"
-                class="h-10 inline border-1 border-solid border-white h-32 w-32 rounded-full"
-              />
-              </a>
-              <a href="/">
+          <a href="/" class="mx-4 my-6 md:my-0">
+            <img
+              src="/super-deno.png"
+              class="h-10 inline border-1 border-solid border-white h-32 w-32 rounded-full"
+            />
+          </a>
+          <a href="/">
             <span class="font-semibold text-4xl tracking-tight">
               Denosoar
             </span>
           </a>
         </div>
         <div class="place-self-center block md:hidden">
-        <button
+          <button
             class="flex items-center px-3 py-2 border rounded text-black hover:border-yellow-400 hover:bg-gray-400 focus:outline-none"
             onClick={() => {
               setNavOpen(!navOpen);
@@ -72,51 +69,61 @@ export default function Header() {
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
           </button>
-        </div>   
-        {navOpen 
-        ? (
-          <div class={tw`${NAV_STYLE}`} >
-            <div class={tw`${NAV_LINKS_STYLE} flex items-center ...`}>
-              <a 
-                href="/" 
-                class={tw`${LINK_STYLE } mr-4 `}
-                >Home</a>
-              <a 
-                href="/about" 
+        </div>
+        {navOpen
+          ? (
+            <div class={tw`${NAV_STYLE}`}>
+              <div class={tw`${NAV_LINKS_STYLE} flex items-center`}>
+                <a
+                  href="/"
+                  class={tw`${LINK_STYLE} mr-4 `}
+                >
+                  Home
+                </a>
+                <a
+                  href="/about"
+                  class={tw`${LINK_STYLE} mr-4`}
+                >
+                  About
+                </a>
+                <a
+                  href="/docs"
+                  class={tw`${LINK_STYLE} mr-4 `}
+                >
+                  Docs
+</a>
+                    <a 
+                href="/csv" 
                 class={tw`${LINK_STYLE } mr-4`}
-                >About</a>
-              <a 
-                href="/docs" 
-                class={tw`${LINK_STYLE } mr-4 `}
-                >Docs</a>                
+                >Upload Chart</a>                
              <a
-                href="https://github.com/oslabs-beta/denosoar"
-                target="_blank"
-                rel="noopener noreferrer"
-                class={tw`${BUTTON_STYLE} mr-4`}>
-                <img
-                  src="/icons8-github-100.png"
-                  class="w-10 h-10 bg-white rounded-full"
-               />
-              </a>
-             <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class={tw`${BUTTON_STYLE}`} mr-4>
-                <img
-                  src="/icons8-linkedin-circled-100.png"
-                  class="w-10 h-10 bg-white rounded-full"
-               /></a>                       
+                  href="https://github.com/oslabs-beta/denosoar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={tw`${BUTTON_STYLE} mr-4`}
+                >
+                  <img
+                    src="/icons8-github-100.png"
+                    class="w-10 h-10 bg-white rounded-full"
+                  />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={tw`${BUTTON_STYLE}`}
+                  mr-4
+                >
+                  <img
+                    src="/icons8-linkedin-circled-100.png"
+                    class="w-10 h-10 bg-white rounded-full"
+                  />
+                </a>
+              </div>
             </div>
-          </div>
-        ) : ""
-        }
-
-        
+          )
+          : ""}
       </nav>
-  </div>
-
-    
+    </div>
   );
 }
