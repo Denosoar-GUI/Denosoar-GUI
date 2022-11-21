@@ -10,12 +10,12 @@ Deno.test("url test", () => {
     assertEquals(url.href, "https://deno.land/foo.js");
   });
 
-  // Deno.test("hello world #1", () => {
-  //   const x = 1 + 2;
-  //   assertEquals(x, 3);
-  // });
+  Deno.test("hello world #1", () => {
+    const x = 1 + 2;
+    assertEquals(x, 3);
+  });
 
-  // Deno.test('port test', () => {
-  //   const input: any = document.getElementById('port')
-  //   assertEquals(2,2)
-  // })
+  Deno.test('port test', () => {
+    //const input: any = document.getElementById('port')
+    assertEquals(2,2)
+  })
