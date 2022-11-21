@@ -9,8 +9,7 @@ export default function Csv () {
     return(
         <>
             <Header />
-            <UploadChart setData={setData}/>
-            <Chart data={data}/>
+            <UploadChart/>
         </>
 
     )

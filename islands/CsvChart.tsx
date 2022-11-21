@@ -40,5 +40,4 @@ import styles  from '../utils/styles.ts';
       </div>
     </div>
   )
-  
 }
