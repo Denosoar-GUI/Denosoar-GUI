@@ -14,3 +14,46 @@ body {
     display: hidden;
     left: -15%
   }
+
+/*  
+  #chartCard {
+    width: 850px;
+    height: 700px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px rgb(255, 202, 220);
+    background: rgba(181, 199, 204, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+  /*
+  #chartBox {
+    width: 850px;
+    height: 700px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px rgb(255, 202, 220);
+    background: white;
+  }
+  #container {
+    width: 750px;
+    height: 570px;
+    max-width: 750px;
+    
+  }
+  #containerBody {
+    height: 500px;
+    /* overflow-x: scroll; */
+  } */
+/* #myLineChart {
+  width: 850px;
+  height: 700px;
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 3px rgb(255, 202, 220);
+  background: rgba(181, 199, 204, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */

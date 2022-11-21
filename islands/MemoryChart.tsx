@@ -6,7 +6,7 @@ import RecordData from "../components/RecordData.tsx";
 
 export default function MemoryChart() {
   // Number of points to display on the chart
-  const displaySize = 30;
+  
   const label: number[] = [];
   const [port, setPort] = useState<string>("");
   const [inUse, setInUse] = useState<boolean>(false);
@@ -38,18 +38,15 @@ export default function MemoryChart() {
     console.log(test);
   };
 
-  for (let i = 0; i < displaySize; i++) {
-    label.push(i - displaySize);
-  }
 
-  const startArray = new Array(displaySize).fill(0);
+  
 
   const chartStyle = {
     labels: label,
     datasets: [
       {
         label: "RSS",
-        data: [...startArray],
+        data: [],
         backgroundColor: [
           "rgba(105, 0, 132, .2)",
         ],
@@ -57,12 +54,12 @@ export default function MemoryChart() {
           "rgba(200, 99, 132, .7)",
         ],
         fill: true,
-        borderWidth: 1,
+        borderWidth: 0,
         tension: 0.5,
       },
       {
         label: "Committed Heap",
-        data: [...startArray],
+        data: [],
         backgroundColor: [
           "rgba(0, 20, 20, .2)",
         ],
@@ -70,11 +67,11 @@ export default function MemoryChart() {
           "rgba(0, 30, 20, .7)",
         ],
         fill: true,
-        borderWidth: 1,
+        borderWidth: 0,
       },
       {
         label: "Heap Total",
-        data: [...startArray],
+        data: [],
         backgroundColor: [
           "rgba(0, 137, 132, .2)",
         ],
@@ -82,11 +79,11 @@ export default function MemoryChart() {
           "rgba(0, 10, 130, .7)",
         ],
         fill: true,
-        borderWidth: 1,
+        borderWidth: 0,
       },
       {
         label: "Heap Used",
-        data: [...startArray],
+        data: [],
         backgroundColor: [
           "rgba(0, 255, 0, .2)",
         ],
@@ -94,12 +91,12 @@ export default function MemoryChart() {
           "rgba(0, 153, 0, .7)",
         ],
         fill: true,
-        borderWidth: 1,
+        borderWidth: 0,
         tension: 0.5,
       },
       {
         label: "External",
-        data: [...startArray],
+        data: [],
         backgroundColor: [
           "rgba(255, 102, 78, .2)",
         ],
@@ -107,13 +104,14 @@ export default function MemoryChart() {
           "rgba(255, 0, 127, .7)",
         ],
         fill: true,
-        borderWidth: 1,
+        borderWidth: 0,
         tension: 0.5,
       },
     ],
   };
 
   const chartOptions = {
+    // maintainAspectRatio: false,
     scales: {
       yAxes: {
         suggestedmax: 100,
@@ -134,7 +132,7 @@ export default function MemoryChart() {
       xAxes: {
         title: {
           display: true,
-          text: "Data Points",
+          text: "Time (sec)",
           align: "center",
           padding: 12,
           font: {
@@ -143,6 +141,7 @@ export default function MemoryChart() {
         },
       },
     },
+    responsive: true,
     animation: true,
     elements: {
       line: {},
@@ -165,6 +164,8 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
+    const containerBody = document.getElementById('containerBody');
+    
     if (inUse) {
       try {
         let myInterval: number;
@@ -174,7 +175,18 @@ export default function MemoryChart() {
         };
         ws.onmessage = (e: MessageEvent) => {
           const mem = JSON.parse(e.data);
-          chartStyle.labels = chartStyle.labels.map((x: number) => x + 1);
+          chartStyle.labels.push(chartStyle.labels.length);
+
+          let displaySize = 30;
+        //   for (let i = 0; i < displaySize; i++) {
+        //   label.push(i - displaySize);
+        // }    
+        console.log('display size', displaySize)
+        // if(displaySize > 30){
+        //   const newWidth = 700 + ((displaySize) * 30)
+        //   containerBody.style.width = `${newWidth}px`
+
+        // }
           for (let i = 0; i < 5; i++) {
             let data;
             if (i === 0) data = mem.rss / 1000;
@@ -182,11 +194,17 @@ export default function MemoryChart() {
             else if (i === 2) data = mem.heapTotal / 1000000;
             else if (i === 3) data = mem.heapUsed / 1000000;
             else if (i === 4) data = mem.external / 1000000;
-            chartStyle.datasets[i].data = [
-              ...chartStyle.datasets[i].data.slice(1),
-              data,
-            ];
+            console.log('before', chartStyle.datasets[i].data)
+            chartStyle.datasets[i].data.push(data)
+            
+            // chartStyle.datasets[i].data = [
+            //   ...chartStyle.datasets[i].data, // removed .slice(1) from this line
+            //   data,
+            // ];
+            displaySize = chartStyle.datasets[i].data.length
+            console.log('after', displaySize)
           }
+          const startArray = new Array(displaySize).fill(0);
           lineChart.update();
           barChart.update();
         };
@@ -245,7 +263,7 @@ export default function MemoryChart() {
     >
       <div class="justify-center items-center flex flex-col">
         <div class="relative">
-          <label htmlFor="port">Localhost Port:</label>
+          <label htmlFor="port"></label><br/>
           <input
             id="port"
             class="p-2 border-2"
@@ -273,11 +291,9 @@ export default function MemoryChart() {
             onClick={() => setError("")}
           >
             {error}
-          </div>
-        </div>
-      </div>
+          </div><br/><br/>
 
-      <input
+          <input
         id="frequency"
         class="p-2 border-2"
         type="number"
@@ -285,32 +301,41 @@ export default function MemoryChart() {
         onInput={(e) => handleFreqChange(e)}
       >
       </input>
-      <button id="change_freq" class="bg-green-500" onClick={handleTiming}>
+      <button 
+        id="change_freq" 
+        class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-6 mt-4 p-2 rounded shadow-2xl" 
+        onClick={handleTiming}>
         Sampling Frequency
       </button>
+        </div>
+      </div>
+
+      
 
       <h1 class="mx-auto text-4xl left-3 pt-10 pb-5 text-center">
         Memory Usage
       </h1>
-      <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
-        <button
-          class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
-          id="barBtn"
-          onClick={toggleGraph}
-        >
-          Bar Chart
-        </button>
-        <canvas id="myLineChart"></canvas>
-      </div>
-      <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
-        <button
-          class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
-          id="lineBtn"
-          onClick={toggleGraph}
-        >
-          Line Chart
-        </button>
-        <canvas id="myBarChart"></canvas>
+      <div id='chartCard'>
+        <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
+          <button
+            class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
+            id="barBtn"
+            onClick={toggleGraph}
+          >
+            Bar Chart
+          </button>
+          <canvas id="myLineChart"></canvas>
+        </div>
+        <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
+          <button
+            class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
+            id="lineBtn"
+            onClick={toggleGraph}
+          >
+            Line Chart
+          </button>
+          <canvas id="myBarChart"></canvas>
+        </div>
       </div>
       <div class="justify-center items-center flex flex-col">
         <RecordData port={port} />
