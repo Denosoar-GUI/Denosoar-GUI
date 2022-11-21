@@ -10,9 +10,9 @@ import * as $3 from "./routes/docs.tsx";
 import * as $4 from "./routes/index.tsx";
 import * as $$0 from "./islands/CopyToClip.tsx";
 import * as $$1 from "./islands/CsvChart.tsx";
-import * as $$2 from "./islands/Header.tsx";
-import * as $$3 from "./islands/MemoryChart.tsx";
-import * as $$4 from "./islands/csv.tsx";
+import * as $$2 from "./islands/MemoryChart.tsx";
+import * as $$3 from "./islands/Nav.tsx";
+import * as $$4 from "./islands/Upload.tsx";
 
 const manifest = {
   routes: {
@@ -25,9 +25,9 @@ const manifest = {
   islands: {
     "./islands/CopyToClip.tsx": $$0,
     "./islands/CsvChart.tsx": $$1,
-    "./islands/Header.tsx": $$2,
-    "./islands/MemoryChart.tsx": $$3,
-    "./islands/csv.tsx": $$4,
+    "./islands/MemoryChart.tsx": $$2,
+    "./islands/Nav.tsx": $$3,
+    "./islands/Upload.tsx": $$4,
   },
   baseUrl: import.meta.url,
   config,

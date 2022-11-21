@@ -1,4 +1,4 @@
-import Header from "../islands/Header.tsx";
+import Header from "../components/Header.tsx";
 import Bio from "../components/Bio.tsx";
 
 export default function About() {
@@ -62,20 +62,8 @@ export default function About() {
           {bios}
         </section>
   
-        <h3 class="text-2xl ml-4 mt-4">Meet the Engineers behind Denosoar</h3>
-        <ul class="mt-6 ml-4 flex justify-between flex-row">
-          {names.map((el, index) => (
-            <li class="text-lg mt-6  w-1/6" key={index}>
-              {el[0]}{" "}
-              <a href={el[1]}>
-                <img
-                  src="/icons8-github-100.png"
-                  class="w-10 h-10 bg-white rounded-full"
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <h3 class="text-2xl ml-4 mt-4">Create Footer Here</h3>
+
       </div>
     );
   }

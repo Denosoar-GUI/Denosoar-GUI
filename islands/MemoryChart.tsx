@@ -3,6 +3,7 @@
 import { useEffect, useState } from "preact/hooks";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "../components/RecordData.tsx";
+import styles from "../utils/styles.ts";
 
 export default function MemoryChart() {
   // Number of points to display on the chart
@@ -41,116 +42,9 @@ export default function MemoryChart() {
 
   
 
-  const chartStyle = {
-    labels: label,
-    datasets: [
-      {
-        label: "RSS",
-        data: [],
-        backgroundColor: [
-          "rgba(105, 0, 132, .2)",
-        ],
-        borderColor: [
-          "rgba(200, 99, 132, .7)",
-        ],
-        fill: true,
-        borderWidth: 0,
-        tension: 0.5,
-      },
-      {
-        label: "Committed Heap",
-        data: [],
-        backgroundColor: [
-          "rgba(0, 20, 20, .2)",
-        ],
-        borderColor: [
-          "rgba(0, 30, 20, .7)",
-        ],
-        fill: true,
-        borderWidth: 0,
-      },
-      {
-        label: "Heap Total",
-        data: [],
-        backgroundColor: [
-          "rgba(0, 137, 132, .2)",
-        ],
-        borderColor: [
-          "rgba(0, 10, 130, .7)",
-        ],
-        fill: true,
-        borderWidth: 0,
-      },
-      {
-        label: "Heap Used",
-        data: [],
-        backgroundColor: [
-          "rgba(0, 255, 0, .2)",
-        ],
-        borderColor: [
-          "rgba(0, 153, 0, .7)",
-        ],
-        fill: true,
-        borderWidth: 0,
-        tension: 0.5,
-      },
-      {
-        label: "External",
-        data: [],
-        backgroundColor: [
-          "rgba(255, 102, 78, .2)",
-        ],
-        borderColor: [
-          "rgba(255, 0, 127, .7)",
-        ],
-        fill: true,
-        borderWidth: 0,
-        tension: 0.5,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    // maintainAspectRatio: false,
-    scales: {
-      yAxes: {
-        suggestedmax: 100,
-        suggestedmin: 0,
-        ticks: {
-          stepSize: 5,
-        },
-        title: {
-          display: true,
-          text: "Memory Usage (Mb)",
-          align: "center",
-          padding: 16,
-          font: {
-            size: 24,
-          },
-        },
-      },
-      xAxes: {
-        title: {
-          display: true,
-          text: "Time (sec)",
-          align: "center",
-          padding: 12,
-          font: {
-            size: 24,
-          },
-        },
-      },
-    },
-    responsive: true,
-    animation: true,
-    elements: {
-      line: {},
-      point: {
-        radius: 1,
-      },
-    },
-  };
-
+  const { chartStyle, chartOptions } = styles(label);
+  chartOptions.scales.xAxes.title.text = "Data Points";
+  
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
     const ctx2 = document.getElementById("myBarChart");
@@ -295,16 +189,13 @@ export default function MemoryChart() {
 
           <input
         id="frequency"
-        class="p-2 border-2"
+        class="p-2 border-2 w-20"
         type="number"
         placeholder="1000"
         onInput={(e) => handleFreqChange(e)}
       >
       </input>
-      <button 
-        id="change_freq" 
-        class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-6 mt-4 p-2 rounded shadow-2xl" 
-        onClick={handleTiming}>
+      <button id="change_freq" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-3 mt-4 p-2 rounded shadow-2xl" onClick={handleTiming}>
         Sampling Frequency
       </button>
         </div>
@@ -315,27 +206,25 @@ export default function MemoryChart() {
       <h1 class="mx-auto text-4xl left-3 pt-10 pb-5 text-center">
         Memory Usage
       </h1>
-      <div id='chartCard'>
-        <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
-          <button
-            class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
-            id="barBtn"
-            onClick={toggleGraph}
-          >
-            Bar Chart
-          </button>
-          <canvas id="myLineChart"></canvas>
-        </div>
-        <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
-          <button
-            class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
-            id="lineBtn"
-            onClick={toggleGraph}
-          >
-            Line Chart
-          </button>
-          <canvas id="myBarChart"></canvas>
-        </div>
+      <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
+        <button
+          class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
+          id="barBtn"
+          onClick={toggleGraph}
+        >
+          View Bar Chart
+        </button>
+        <canvas id="myLineChart"></canvas>
+      </div>
+      <div id="bar" class="hidden border-2 border-solid border-gray-300 p-4">
+        <button
+          class="border-2 border-yellow-600 rounded-lg px-3 py-2 text-black cursor-pointer hover:bg-yellow-600 hover:text-yellow-200 ml-6"
+          id="lineBtn"
+          onClick={toggleGraph}
+        >
+          View Line Chart
+        </button>
+        <canvas id="myBarChart"></canvas>
       </div>
       <div class="justify-center items-center flex flex-col">
         <RecordData port={port} />
