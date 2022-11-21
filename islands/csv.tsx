@@ -48,7 +48,6 @@ export default function UploadChart(){
 
     return(
         <div onDragEnd={handleDrag} onDrag={handleDrag} onDragStart={handleDrag} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}>
-
             <form class='h-full w-1/4 text-center' id='upload-csv' onSubmit={(e) => e.preventDefault()}>
                     <input class='hidden' ref={input} type='file' multiple={true} onChange={handleChange}/>
                     <label class='h-full flex items-center justify-center border-dotted border-2 border-red-200 rounded m-10 p-10' htmlFor='upload-csv' className={dragActive ? 'drag-active' : ''}>
