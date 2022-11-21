@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
 // delay is for async testing
-import { delay } from "https://deno.land/std@0.165.0/async/delay.ts";
-import  MemoryChart from '../islands/MemoryChart.tsx'
+// import { delay } from "https://deno.land/std@0.165.0/async/delay.ts";
+// import  MemoryChart from '../islands/MemoryChart.tsx'
 
 
 // testing url test and addition tests to make sure this works
@@ -17,5 +17,5 @@ Deno.test("url test", () => {
 
   Deno.test('port test', () => {
     const input: any = document.getElementById('port')
-    assertEquals()
+    // assertEquals()
   })

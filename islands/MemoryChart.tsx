@@ -4,6 +4,7 @@ import { useEffect, useState } from "preact/hooks";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "../components/RecordData.tsx";
 import styles from "../utils/styles.ts";
+
 export default function MemoryChart() {
   // Number of points to display on the chart
   
@@ -13,8 +14,8 @@ export default function MemoryChart() {
   const [error, setError] = useState<string>("");
   const [frequency, setFrequency] = useState<number>(1000);
 
-  const handleChange = (e: any) => {
-    setPort(e.target.value);
+  const handleChange = (e: Event) => {
+    setPort((e.target as HTMLInputElement).value);
     console.log(port);
   };
 
@@ -23,8 +24,8 @@ export default function MemoryChart() {
     else setInUse(true);
   };
 
-  const handleFreqChange = (e: any) => {
-    setFrequency(e.target.value);
+  const handleFreqChange = (e: Event) => {
+    setFrequency(Number((e.target as HTMLInputElement).value));
   };
 
   const handleTiming = async () => {
@@ -82,11 +83,11 @@ export default function MemoryChart() {
         // }
           for (let i = 0; i < 5; i++) {
             let data;
-            if (i === 0) data = mem.rss / 1000;
-            else if (i === 1) data = mem.committed / 1000000;
-            else if (i === 2) data = mem.heapTotal / 1000000;
-            else if (i === 3) data = mem.heapUsed / 1000000;
-            else if (i === 4) data = mem.external / 1000000;
+            if (i === 0) data = mem.rss;
+            else if (i === 1) data = mem.committed / 1000;
+            else if (i === 2) data = mem.heapTotal / 1000;
+            else if (i === 3) data = mem.heapUsed / 1000;
+            else if (i === 4) data = mem.external / 1000;
             console.log('before', chartStyle.datasets[i].data)
             chartStyle.datasets[i].data.push(data)
             
