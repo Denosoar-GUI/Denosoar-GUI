@@ -14,3 +14,24 @@ body {
     display: hidden;
     left: -15%
   }
+
+  #upload-csv {
+    width: 100%;
+    height: 20%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    
+  }
+
+  #drag-active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed rgb(228, 90, 88);
+    height: 20rem;
+    width: 20rem;
+    border-radius: 10px;
+    padding: 10px;
+  }
+   /*class='h-full flex items-center justify-center border-dotted border-2 border-red-200 rounded m-10 p-10'
