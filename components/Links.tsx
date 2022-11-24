@@ -4,7 +4,7 @@ export default function Links() {
   const LINK_STYLE = tw`block mt-4 md:inline-block md:mt-0 hover:text-black`;
   const NAV_STYLE =
     tw`w-full block flex-grow md:flex md:items-center md:w-auto`;
-  const NAV_LINKS_STYLE = tw`text-xl md:flex-grow`;
+  const NAV_LINKS_STYLE = tw`text-xl `;
   const BUTTON_STYLE =
     tw`inline-block text-sm px-4 py-2 leading-none border rounded text-black border-white hover:border-transparent hover:bg-yellow-400 mt-4 md:mt-0`
   return (
@@ -29,12 +29,12 @@ export default function Links() {
           >
             Docs
           </a>
-              <a 
-          href="/csv" 
-          class={tw`${LINK_STYLE } mr-4`}
+          <a
+            href="/csv"
+            class={tw`${LINK_STYLE} mr-4`}
           >
             Upload Chart
-          </a>                
+          </a>
           <a
             href="https://github.com/oslabs-beta/denosoar"
             target="_blank"
@@ -61,7 +61,7 @@ export default function Links() {
             GUI
           </a>
         </div>
-      </div> 
+      </div>
     </nav>
   )
 }

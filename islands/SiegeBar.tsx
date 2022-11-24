@@ -39,9 +39,10 @@ export default function SiegeBar(props: any) {
         setTimeout( () => {
             document.getElementById('siege-bar')?.classList.remove('glowing');
             setDisabled(false)
+            resetSiege();
         } , duration * 1000)
 
-        resetSiege();
+        
 
     }
 

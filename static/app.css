@@ -73,6 +73,7 @@ body {
       margin: 0; 
   }
 
+  /* Used to define the animation for the glowing of siege bar*/
   @keyframes glowing {
     0% {
       background-color: #eb6767;
