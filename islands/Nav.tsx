@@ -40,7 +40,7 @@ export default function Nav(){
 
   
     return (
-      <div class="flex flex-row justify-between items-center">
+      <div class="flex flex-row justify-between items-center overflow-hidden">
         {navOpen ? <Links/> : <></>}
         <MenuButton onClick = {() => setNavOpen(!navOpen)}/>
       </div>
