@@ -4,6 +4,7 @@ import { useEffect, useState } from "preact/hooks";
 import * as chartjs from "https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js";
 import RecordData from "../components/RecordData.tsx";
 import styles from "../utils/styles.ts";
+import SiegeBar from "./SiegeBar.tsx";
 export default function MemoryChart() {
   // Number of points to display on the chart
   
@@ -202,6 +203,8 @@ export default function MemoryChart() {
       </button>
         </div>
       </div>
+
+      <SiegeBar port={port}/>
 
       
 

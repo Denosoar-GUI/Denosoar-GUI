@@ -12,7 +12,8 @@ import * as $$0 from "./islands/CopyToClip.tsx";
 import * as $$1 from "./islands/CsvChart.tsx";
 import * as $$2 from "./islands/MemoryChart.tsx";
 import * as $$3 from "./islands/Nav.tsx";
-import * as $$4 from "./islands/Upload.tsx";
+import * as $$4 from "./islands/SiegeBar.tsx";
+import * as $$5 from "./islands/Upload.tsx";
 
 const manifest = {
   routes: {
@@ -27,7 +28,8 @@ const manifest = {
     "./islands/CsvChart.tsx": $$1,
     "./islands/MemoryChart.tsx": $$2,
     "./islands/Nav.tsx": $$3,
-    "./islands/Upload.tsx": $$4,
+    "./islands/SiegeBar.tsx": $$4,
+    "./islands/Upload.tsx": $$5,
   },
   baseUrl: import.meta.url,
   config,

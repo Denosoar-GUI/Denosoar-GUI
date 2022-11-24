@@ -13,7 +13,12 @@ body {
   }
 
   #about-team {
-    background-image: linear-gradient(lightgreen, rgb(177, 234, 148));
+    background-image: linear-gradient(lightgreen, rgb(85, 216, 19));
+  }
+
+  #docs-body{
+    display: grid;
+    grid-template-columns: 16rem 1fr 1fr 1fr;
   }
 
   #docs-main{
