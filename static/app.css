@@ -8,6 +8,18 @@ body {
     /* color: blue; */
   }
 
+  #about-product {
+    background-image: linear-gradient(white, lightgreen);
+  }
+
+  #about-team {
+    background-image: linear-gradient(lightgreen, rgb(177, 234, 148));
+  }
+
+  #docs-main{
+    background-image: linear-gradient(white, lightgreen);
+  }
+
   #error-msg {
     background-color: lightgoldenrodyellow;
     border: 1px solid orange;
