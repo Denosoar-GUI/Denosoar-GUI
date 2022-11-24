@@ -8,10 +8,13 @@ export default function SiegeBar(props: any) {
     const [concurrency, setConcurrency] = useState(0)
     const [rps, setRPS] = useState(0)
     const [duration, setDuration] = useState(0)
+    const [disabled, setDisabled] = useState(false)
 
     const INPUT_STYLE = tw` hover:bg-red-100 text-center border-2 border-red-800 mx-2 my-1 rounded-md w-36`;
 
-    function handleClick() {
+    function handleClick(e) {
+
+        console.log('SIEGE CLICKED')
 
         const siegeObj = {
             url,
@@ -20,13 +23,24 @@ export default function SiegeBar(props: any) {
             duration
         }
 
-        const response = fetch(`http://localhost:${props.port}/siege`, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify(siegeObj),
-        });
+        // HOOK UP CONNECTION TO BACKEND BEFORE RUNNING THE FETCH REQUEST
+        // const response = fetch(`http://localhost:${props.port}/siege`, {
+        //     method: "POST",
+        //     mode: "no-cors",
+        //     body: JSON.stringify(siegeObj),
+        // })
+        //     .then(data=> data.json())
+        //     .then(data=> console.log(data))
+
+        // To prevent firing siege button again until the current siege is over.
+        setDisabled(true)
         
-        console.log('SIEGE')
+        document.getElementById('siege-bar')?.classList.add('glowing');
+        setTimeout( () => {
+            document.getElementById('siege-bar')?.classList.remove('glowing');
+            setDisabled(false)
+        } , duration * 1000)
+
         resetSiege();
 
     }
@@ -48,8 +62,9 @@ export default function SiegeBar(props: any) {
     }
 
     return(
-        <div id='siege-bar' class="border-1 border-solid border-green-500 leading-8 flex p-2 items-center">
-            <div>
+        <div id='siege-bar' class="leading-8 flex p-2 items-center">
+
+            <div id="siege_input">
                 I would like to siege
                 <input
                     id="URLinput"
@@ -80,11 +95,15 @@ export default function SiegeBar(props: any) {
                     onInput = {(e) => setDuration(e.target?.value)} />
                     seconds.
             </div>
+
             <button
+                id="siege_button"
                 class="text-2xl hover:bg-red-400 hover:border-red-900 w-24 h-24 flex-none border-2 bg-red-300"
+                disabled={disabled}
                 onClick = {handleClick}>
                     SIEGE
             </button>
+
         </div>
     )
 }

@@ -204,8 +204,6 @@ export default function MemoryChart() {
         </div>
       </div>
 
-      <SiegeBar port={port}/>
-
       
 
       <h1 class="mx-auto text-4xl left-3 pt-10 pb-5 text-center">
@@ -234,6 +232,7 @@ export default function MemoryChart() {
       <div class="justify-center items-center flex flex-col">
         <RecordData port={port} />
       </div>
+      <SiegeBar port={port}/>
     </div>
   );
 }

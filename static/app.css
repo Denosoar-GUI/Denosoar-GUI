@@ -8,6 +8,18 @@ body {
     /* color: blue; */
   }
 
+  #siege-bar {
+    border-width: 7px;
+    border-style: solid;
+    border-image: repeating-linear-gradient(45deg, black, yellow 2.5%) 10;
+    background-color: LIGHTGREEN;
+    
+  }
+
+  .glowing {
+    animation: glowing 1300ms infinite;
+  }
+
   #about-product {
     background-image: linear-gradient(white, lightgreen);
   }
@@ -51,9 +63,36 @@ body {
     border-radius: 10px;
     padding: 10px;
   }
+
+  /* The below styling is to remove the scroll bar for inputs of type number*/
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+  }
+
+  @keyframes glowing {
+    0% {
+      background-color: #eb6767;
+      box-shadow: 0 0 5px #2ba805;
+    }
+    50% {
+      background-color: #e81919;
+      box-shadow: 0 0 20px #49e819;
+    }
+    100% {
+      background-color: #eb6767;
+      box-shadow: 0 0 5px #2ba805;
+    }
+  }
+
   /* #csv {
     display: flex;
     justify-content: center;
     width: 750px;
   } */
    /*class='h-full flex items-center justify-center border-dotted border-2 border-red-200 rounded m-10 p-10'
+
+   
