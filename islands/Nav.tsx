@@ -42,7 +42,16 @@ export default function Nav(){
     return (
       <div class="flex flex-row justify-between items-center overflow-hidden">
         {navOpen ? <Links/> : <></>}
-        <MenuButton onClick = {() => setNavOpen(!navOpen)}/>
+        <MenuButton onClick = {() => {
+          setNavOpen( (prev) => {
+            // const title = document.getElementById('denosaur');
+            // console.log(title)
+            // if (!prev) { title?.classList.add('hidden') }
+            // else {title?.classList.remove('hidden')}
+            return !prev;
+          });
+          }
+        }/>
       </div>
   )
 }

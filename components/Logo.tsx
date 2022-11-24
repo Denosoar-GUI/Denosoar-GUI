@@ -11,7 +11,7 @@ export default function Logo() {
           class="h-10 inline border-1 border-solid border-white h-32 w-32 rounded-full"
         />
       </a>
-      <a href="/">
+      <a href="/" id="denosaur" class="font-bold">
         <span class="font-semibold text-4xl tracking-tight">
           Denosoar
         </span>
