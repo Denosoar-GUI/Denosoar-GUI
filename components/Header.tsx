@@ -9,7 +9,7 @@ import Logo from './Logo.tsx';
 export default function Header() {
 
   return (
-    <div class="bg-gray-300">
+    <div class="bg-blue-200">
       <div class="flex items-center justify-between flex-wrap p-6 mx-auto">
         <Logo />
         <Nav />

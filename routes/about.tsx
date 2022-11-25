@@ -44,10 +44,10 @@ export default function About() {
         <Header />
         <section
           id="about-product"
-          class=" flex bg-gray-100 w-full h-144 justify-center"
+          class=" flex flex-wrap w-full justify-center bg-gradient-to-r"
         >
-          <h1 class="ml-4 text-6xl mt-4 mb-4">About Denosoar</h1>
-          <p class="mr-4 ml-4 text-lg">
+          <h1 class="m-4 w-full text-center text-6xl">About Denosoar</h1>
+          <p class="m-4 text-lg">
             Denosoar is an open source memory tool that is used to track potential
             memory leaks for applications built with Deno. Denosoar analyzes and
             displays in real time the RSS(resident set size), Heap Total, Heap
@@ -57,8 +57,9 @@ export default function About() {
   
         <section
           id="about-team"
-          class="bg-gray-300 w-full py-5"
+          class="w-full py-5"
         >
+          <h1 class="m-4 w-full text-center text-6xl">Meet the team!</h1>
           {bios}
         </section>
   
