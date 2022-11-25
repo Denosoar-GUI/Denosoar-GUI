@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'preact/hooks'
 import Chart from './CsvChart.tsx';
 import readCSV from "../utils/readCSV.ts";
 
+
 export default function UploadChart(){
     const [data, setData] = useState<[string, number[]][]>([]);
     const [dragActive, setDragActive] = useState<boolean>(false);
@@ -36,12 +37,12 @@ export default function UploadChart(){
     }
 
     // Handles change in input 
-    const handleChange = async function(e: any){
-        console.log('changing');
+    const handleChange = async function(e: Event){
+        const target = e.target as HTMLInputElement;
         e.preventDefault();
-        if(e.target?.files && e.target.files[0]){
+        if(target.files && target.files[0]){
             console.log(e.target);
-            const data = await readCSV(e.target.files[0]);
+            const data = await readCSV(target.files[0]);
             setData(data);
         }
     }
