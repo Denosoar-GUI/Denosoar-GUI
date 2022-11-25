@@ -46,7 +46,7 @@ export default function About() {
           id="about-product"
           class=" flex flex-wrap w-full justify-center bg-gradient-to-r"
         >
-          <h1 class="m-4 w-full text-center text-6xl">About Denosoar</h1>
+          <h1 class="m-4 w-full text-center text-5xl font-extrabold">About Denosoar</h1>
           <p class="m-4 text-lg">
             Denosoar is an open source memory tool that is used to track potential
             memory leaks for applications built with Deno. Denosoar analyzes and
@@ -59,7 +59,7 @@ export default function About() {
           id="about-team"
           class="w-full py-5"
         >
-          <h1 class="m-4 w-full text-center text-6xl">Meet the team!</h1>
+          <h1 class="m-4 w-full text-center text-5xl font-extrabold">Meet the team!</h1>
           {bios}
         </section>
   

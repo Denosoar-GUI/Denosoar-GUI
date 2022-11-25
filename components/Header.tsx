@@ -9,11 +9,9 @@ import Logo from './Logo.tsx';
 export default function Header() {
 
   return (
-    <div class="bg-blue-200">
-      <div class="flex items-center justify-between flex-wrap p-6 mx-auto">
+    <div class="bg-blue-200 h-44 flex items-center justify-between p-6 mx-auto overflow-hidden">
         <Logo />
         <Nav />
-      </div>
     </div>
   );
 }

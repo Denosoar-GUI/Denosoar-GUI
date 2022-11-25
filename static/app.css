@@ -8,6 +8,10 @@ body {
     /* color: blue; */
   }
 
+  /* #nav_logo {
+    flex: 1 0 auto;
+  } */
+
   #siege-bar {
     border-width: 7px;
     border-style: solid;
@@ -73,6 +77,7 @@ body {
       margin: 0; 
   }
 
+  /* Used to define the animation for the glowing of siege bar*/
   @keyframes glowing {
     0% {
       background-color: #eb6767;
