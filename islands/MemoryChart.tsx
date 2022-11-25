@@ -76,7 +76,7 @@ export default function MemoryChart() {
         //   for (let i = 0; i < displaySize; i++) {
         //   label.push(i - displaySize);
         // }    
-        console.log('display size', displaySize)
+        // console.log('display size', displaySize)
         // if(displaySize > 30){
         //   const newWidth = 700 + ((displaySize) * 30)
         //   containerBody.style.width = `${newWidth}px`
@@ -89,7 +89,7 @@ export default function MemoryChart() {
             else if (i === 2) data = mem.heapTotal / 1000;
             else if (i === 3) data = mem.heapUsed / 1000;
             else if (i === 4) data = mem.external / 1000;
-            console.log('before', chartStyle.datasets[i].data)
+            // console.log('before', chartStyle.datasets[i].data)
             chartStyle.datasets[i].data.push(data)
             
             // chartStyle.datasets[i].data = [
@@ -97,7 +97,7 @@ export default function MemoryChart() {
             //   data,
             // ];
             displaySize = chartStyle.datasets[i].data.length
-            console.log('after', displaySize)
+            // console.log('after', displaySize)
           }
           const startArray = new Array(displaySize).fill(0);
           lineChart.update();
