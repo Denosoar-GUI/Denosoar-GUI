@@ -7,7 +7,7 @@ export default function Bio(props: any) {
     
   if (props.count % 2 !== 1) {
     return (
-      <div class="flex justify-center min-w-600 w-2/3 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-lg py-1">
+      <div class="flex justify-center min-w-600 w-2/3 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-3xl py-1">
         <section class="flex-1 text-center py-2">
           <p>{props.name}</p>
           <img
@@ -48,7 +48,7 @@ export default function Bio(props: any) {
     );
   } 
 
-  return (<div class="flex justify-center min-w-600 w-2/3 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-lg py-1">
+  return (<div class="flex justify-center min-w-600 w-2/3 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-3xl py-1">
 
   <section class="flex-1 text-center py-2 relative">
     <p class='mx-4'>{props.description}</p>

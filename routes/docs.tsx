@@ -14,10 +14,10 @@ export default function Docs() {
   return (
     <div>
       <Header />
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        <aside class="w-64" aria-label="Sidebar">
+      <div id="docs-body" >
+        <aside class="col-span-1" aria-label="Sidebar">
           <div
-            class="w-60 pl-5 h-full shadow-md bg-white px-1 absolute"
+            class="pl-5 w-64 h-full shadow-md bg-white"
             key="Documentations"
           >
             <br />
@@ -36,7 +36,7 @@ export default function Docs() {
             </ul>
           </div>
         </aside>
-        <main class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 pt-20">
+        <main class="col-span-3 pt-20 px-5" id="docs-main">
           <h1 class="mx-auto max-w-screen-md font-bold text-5xl">
             Welcome to DenoSoar
           </h1>

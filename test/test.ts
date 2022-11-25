@@ -1,8 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
 // delay is for async testing
- import { delay } from "https://deno.land/std@0.165.0/async/delay.ts";
+ // import { delay } from "https://deno.land/std@0.165.0/async/delay.ts";
  import { Rhum } from "https://deno.land/x/rhum@v1.1.2/mod.ts";
- import  MemoryChart from '../islands/MemoryChart.tsx'
+ // import  MemoryChart from '../islands/MemoryChart.tsx'
 
 
 
@@ -21,7 +21,11 @@ Deno.test("url test", () => {
   Rhum.testPlan('../islands/MemoryChart.tx', () => {
     Rhum.testSuite('MemoryChart()', () => {
       Rhum.testCase('port should start when button is clicked', () => {
-        const buttonClick = 
+        //const buttonClick = 
       })
     })
+  
+    Deno.test('port test', () => {
+    const input: any = document.getElementById('port')
+    // assertEquals()
   })

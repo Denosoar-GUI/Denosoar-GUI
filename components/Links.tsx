@@ -51,7 +51,7 @@ export default function Links() {
             href="https://github.com/Denosoar-GUI/Denosoar-GUI"
             target="_blank"
             rel="noopener noreferrer"
-            class={tw`${BUTTON_STYLE} mr-4`}
+            class={tw`${BUTTON_STYLE} mr-4 text-center`}
             mr-4
           >
             <img

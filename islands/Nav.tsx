@@ -9,6 +9,7 @@ import Links from "../components/Links.tsx";
 export default function Nav(){
   const ref = useRef(window);
   const [navOpen, setNavOpen] = useState(false);
+  
   useEffect(() => {
     let lastKnownWidth = 0;
     let ticking = false;
