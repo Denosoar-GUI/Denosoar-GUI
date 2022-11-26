@@ -28,6 +28,12 @@ body {
     background-image: linear-gradient(white, lightgreen);
   }
 
+  #grid_container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 75%
+  }
+
   #about-team {
     background-image: linear-gradient(lightgreen, rgb(85, 216, 19));
   }
@@ -62,8 +68,8 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px dashed rgb(228, 90, 88);
-    height: 20rem;
-    width: 20rem;
+    height: 10rem;
+    width: 75%;
     border-radius: 10px;
     padding: 10px;
   }
