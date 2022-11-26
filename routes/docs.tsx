@@ -37,7 +37,7 @@ export default function Docs() {
           </div>
         </aside>
         <main class="col-span-3 pt-20 px-5" id="docs-main">
-          <h1 class="mx-auto max-w-screen-md font-bold text-5xl">
+          <h1 class="mx-auto max-w-screen-md font-bold text-6xl">
             Welcome to DenoSoar
           </h1>
           <p class="mx-auto max-w-screen-md">
