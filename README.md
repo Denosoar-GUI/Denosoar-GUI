@@ -1,5 +1,5 @@
 # Denosoar-GUI
 Denosoar Front End GUI
 
-Denosoar is an open source memory tool that is used to track potential memory leaks for applications built with Deno. Denosoar analyzes and displays in real time the RSS(resident set size), Heap Total, Heap Usage and External Memory using easy to read charts. The features
+Denosoar is an open source memory tool that is used to track potential memory leaks for applications built with Deno. Denosoar analyzes and displays in real time the RSS(resident set size), Heap Total, Heap Usage and External Memory using easy to read charts. The features provided by our front-end GUI must be used in tandem with our Deno third-party module, which can be imported and downloaded from the Deno-land library [right here](https://deno.land/x/denosoar).
 
