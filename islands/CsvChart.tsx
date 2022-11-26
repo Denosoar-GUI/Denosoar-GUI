@@ -34,7 +34,7 @@ import styles  from '../utils/styles.ts';
   }, [props.data]);
 
   return(
-    <div id = "csv">
+    <div id = "csv" class='w-4/5 mx-auto min-w-800 max-w-6xl pt-10 pb-10'>
       <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
           <canvas id="myCsvChart"></canvas>
       </div>
