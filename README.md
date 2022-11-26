@@ -6,7 +6,7 @@ Denosoar is an open source memory tool that is used to track potential memory le
 ## Getting started
 
 ### Connecting / Disconnecting to your application
-After starting up your back-end Deno application, and invoking denosoar.init(*PORT#*) from within your application, you should be able to connect to that *PORT* from the [front-end GUI](denosoar.deno.dev). Just type the direct URL path into the input section, and then click the 'Connect' button. If connected successfully, you should see the data streaming on the Chart.
+After starting up your back-end Deno application, and invoking denosoar.init(**PORT#**) from within your application, you should be able to connect to that **PORT** from the [front-end GUI](denosoar.deno.dev). Just type the direct URL path into the input section, and then click the 'Connect' button. If connected successfully, you should see the data streaming on the Chart.
 
 (Insert a GIF of properly connecting to a listening server)
 
@@ -33,17 +33,18 @@ Once you have connected, you can save all your incoming data to a CSV file. The 
 
 If your backend application is listening for any GET requests at any endpoint, you can choose to load-test your server using our built-in load-testing tool. To do this, just enter the requested information detailed below. (*note* - you will not be able to submit another load-test until the current test has finished.)
 
-  - *Endpoint* : Enter the exact URL at which you would like to send GET requests to
-  - *Concurrency* : Enter how many GET requests you would like to send at one time.
-  - *Times per Second* : Enter how many times per second you would like to send the concurrent requests.
-  - *Duration* : Enter how long you would like to test your application for.
+  *Inputs*
+  - **Endpoint** : Enter the exact URL at which you would like to send GET requests to
+  - **Concurrency** : Enter how many GET requests you would like to send at one time.
+  - **Times per Second** : Enter how many times per second you would like to send the concurrent requests.
+  - **Duration** : Enter how long you would like to test your application for.
   
  *Example* 
-  - *Endpoint* : 'http://localhost:3000/'
-  - *Concurrency* : '10000'
-  - *Times per Second* : '5'
-  - *Duration* : '10'
-  - *Result* : Send 10,000 concurrent GET requests, 5 times a second, for a duration of 10 seconds... 10,000 X 5 X 10 = 250,000 GET requests to your endpoint.
+  - **Endpoint** : 'http://localhost:3000/'
+  - **Concurrency** : '10000'
+  - **Times per Second** : '5'
+  - **Duration** : '10'
+  - **Result** : Send 10,000 concurrent GET requests, 5 times a second, for a duration of 10 seconds... 10,000 X 5 X 10 = 250,000 GET requests to your endpoint.
   
  (Insert a GIF of entering a SIEGE command into the GUI)
  
