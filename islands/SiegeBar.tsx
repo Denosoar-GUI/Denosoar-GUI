@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { tw } from "twind";
+import loadtest from '../utils/loadTest.ts'
 
 
 
@@ -12,7 +13,7 @@ export default function SiegeBar(props: any) {
 
     const INPUT_STYLE = tw` hover:bg-red-100 text-center border-2 border-red-800 mx-2 my-1 rounded-md w-36`;
 
-    function handleClick(e) {
+    async function handleClick(e) {
 
         console.log('SIEGE CLICKED')
 
@@ -22,15 +23,16 @@ export default function SiegeBar(props: any) {
             rps,
             duration
         }
-
+        await loadtest(url, concurrency, rps, duration);
         // HOOK UP CONNECTION TO BACKEND BEFORE RUNNING THE FETCH REQUEST
-        // const response = fetch(`http://localhost:${props.port}/siege`, {
-        //     method: "POST",
+        // const response = fetch(siegeObj.url) {
         //     mode: "no-cors",
         //     body: JSON.stringify(siegeObj),
         // })
         //     .then(data=> data.json())
         //     .then(data=> console.log(data))
+
+        // IF REQUEST IS ACCEPTED, THEN DO THIS
 
         // To prevent firing siege button again until the current siege is over.
         setDisabled(true)
@@ -39,11 +41,9 @@ export default function SiegeBar(props: any) {
         setTimeout( () => {
             document.getElementById('siege-bar')?.classList.remove('glowing');
             setDisabled(false)
-            resetSiege();
+            // resetSiege();
         } , duration * 1000)
-
-        
-
+        ////////////////////
     }
 
     function resetSiege() {
@@ -53,13 +53,11 @@ export default function SiegeBar(props: any) {
         setRPS(0);
         setDuration(0);
 
-
         // This is to set the input fields back to display their placeholder value.
         document.getElementById('URLinput').value = ''
         document.getElementById('concurrency_input').value = ''
         document.getElementById('rps_input').value = ''
         document.getElementById('duration_input').value = ''
-
     }
 
     return(
@@ -87,7 +85,7 @@ export default function SiegeBar(props: any) {
                     type="number"
                     class={tw`${INPUT_STYLE}`}
                     onInput = {(e) => setRPS(e.target?.value)} />
-                requests per second, for
+                times per second, for
                 <input
                     id="duration_input"
                     placeholder="30" 
