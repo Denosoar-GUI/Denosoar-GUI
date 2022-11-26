@@ -8,6 +8,10 @@ body {
     /* color: blue; */
   }
 
+  /* #nav_logo {
+    flex: 1 0 auto;
+  } */
+
   #siege-bar {
     border-width: 7px;
     border-style: solid;
@@ -22,6 +26,12 @@ body {
 
   #about-product {
     background-image: linear-gradient(white, lightgreen);
+  }
+
+  #grid_container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 75%
   }
 
   #about-team {
@@ -58,8 +68,8 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px dashed rgb(228, 90, 88);
-    height: 20rem;
-    width: 20rem;
+    height: 10rem;
+    width: 75%;
     border-radius: 10px;
     padding: 10px;
   }
@@ -73,6 +83,7 @@ body {
       margin: 0; 
   }
 
+  /* Used to define the animation for the glowing of siege bar*/
   @keyframes glowing {
     0% {
       background-color: #eb6767;
