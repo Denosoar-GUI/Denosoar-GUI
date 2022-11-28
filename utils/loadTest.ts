@@ -1,10 +1,8 @@
+// Function will invoke pseudo load-testing effect
 export default function loadtest(url: string, concurrency: string, rps: string, duration:string) {
 
-  const n = 1000;
-  let count = 0;
-
-  function getRequests(url: string, concurrency: number): any[] {
-    // console.log('L13 : now Invoking getRequests');
+  // Helper function to create an array of unresolved promises. Each element is an unresolved GET request a URL.
+  function getRequests(url: string, concurrency: number): Promise<void>[] {
     return new Array(concurrency).fill(
       new Promise((resolve) => {
         const res = fetch(url, {
@@ -15,15 +13,12 @@ export default function loadtest(url: string, concurrency: string, rps: string, 
     );
   }
 
+  // Set an infinite time-interval in which to create and resolve all the GET reqeusts from invoking helper function
   const siegeInterval = setInterval(async () => {
-    const response = await Promise.all(getRequests(url, Number(concurrency)));
-    // console.log(response);
-    
-    for (let res of response) {
-      count++
-    }
-  }, n / Number(rps));
+    await Promise.all(getRequests(url, Number(concurrency)));
+  }, 1000 / Number(rps));
 
-  setTimeout( ()=> { console.log(count); return clearInterval(siegeInterval)} , Number(duration)*1000)
+  // After a set duration of time, clear the inifinite interval
+  setTimeout( ()=>  clearInterval(siegeInterval) , Number(duration)*1000)
 
 }

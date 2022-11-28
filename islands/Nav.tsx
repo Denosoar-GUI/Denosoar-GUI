@@ -6,22 +6,29 @@ import Links from "../components/Links.tsx";
 /**
  * Site navigation links.
  */
-export default function Nav(){
+export default function Nav() {
   const ref = useRef(window);
   const [navOpen, setNavOpen] = useState(false);
-  
+  const [seeButton, setSeeButton] = useState(false);
+
+  /**
+   * Collapse the navigation on window resizing.
+   */
   useEffect(() => {
     let lastKnownWidth = 0;
     let ticking = false;
+    // collapse the navigation if width is less than 915px na sshow menu button
     const collapse = (width: number) => {
-      // console.log(width);
-      if (width > 768) {
+      if (width > 915) {
         setNavOpen(true);
+        setSeeButton(false);
       } else {
         setNavOpen(false);
+        setSeeButton(true);
       }
     };
-    const onResize = (e: Event) => {
+    //dynamically set the window width 
+    const onResize = () => {
       lastKnownWidth = ref.current.innerWidth;
       if (!ticking) {
         ref.current.requestAnimationFrame(() => {
@@ -38,20 +45,16 @@ export default function Nav(){
     };
   }, []);
 
-  
-    return (
-      <div class="flex flex-row justify-between items-center overflow-hidden">
-        {navOpen ? <Links/> : <></>}
-        <MenuButton onClick = {() => {
-          setNavOpen( (prev) => {
-            // const title = document.getElementById('denosaur');
-            // console.log(title)
-            // if (!prev) { title?.classList.add('hidden') }
-            // else {title?.classList.remove('hidden')}
-            return !prev;
-          });
-          }
-        }/>
-      </div>
+
+  return (
+    <div class="flex flex-row justify-between items-center overflow-hidden">
+      {navOpen ? <Links /> : <></>}
+      <MenuButton seen={seeButton} onClick={() => {
+        setNavOpen((prev) => {
+          return !prev;
+        });
+      }
+      } />
+    </div>
   )
 }
