@@ -15,6 +15,9 @@ export default function SiegeBar() {
 
     const INPUT_STYLE = tw` hover:bg-red-100 text-center border-2 border-red-800 mx-2 my-1 rounded-md w-36`;
 
+    // On button click, start the animation effects, and disable the button so that it can't be clicked again until the current load-test has ended
+    // Take in user input value and invoke loadtest() 
+    // After the load-test has ended, stop animation, and re-enable the button click
     function handleClick(e: Event) {
         loadtest(url, concurrency.toString(), rps.toString(), duration.toString());
         setDisabled(true);

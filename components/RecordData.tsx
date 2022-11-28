@@ -1,9 +1,11 @@
 export default function RecordData(props: { port: string }) {
+  // call to server to initiate the recording of data
   function start() {
     fetch(`http://localhost:${props.port}/start`, {
       mode: "no-cors",
     });
   }
+  // call to server to stop recording data
   function stop() {
     fetch(`http://localhost:${props.port}/stop`, {
       mode: "no-cors",
