@@ -1,3 +1,7 @@
+html {
+  min-width: 900px;
+}
+
 body {
     background: rgb(243 244 246);
   }
