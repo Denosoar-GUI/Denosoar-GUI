@@ -17,7 +17,6 @@ export default function MemoryChart() {
 
   const handleChange = (e: Event) => {
     setPort((e.target as HTMLInputElement).value);
-    console.log(port);
   };
 
   const handleStart = () => {
@@ -30,14 +29,11 @@ export default function MemoryChart() {
   };
 
   const handleTiming = async () => {
-    const test = await fetch(`http://localhost:${port}/interval`, {
+    await fetch(`http://localhost:${port}/interval`, {
       method: "POST",
       mode: "no-cors",
       body: JSON.stringify(frequency),
     });
-
-    // Handles if change is made through CLI, to update frequency, so it's consistent with the front end.
-    console.log(test);
   };
 
 
@@ -73,15 +69,7 @@ export default function MemoryChart() {
           chartStyle.labels.push(chartStyle.labels.length);
 
           let displaySize = 30;
-        //   for (let i = 0; i < displaySize; i++) {
-        //   label.push(i - displaySize);
-        // }    
-        // console.log('display size', displaySize)
-        // if(displaySize > 30){
-        //   const newWidth = 700 + ((displaySize) * 30)
-        //   containerBody.style.width = `${newWidth}px`
 
-        // }
           for (let i = 0; i < 5; i++) {
             let data;
             if (i === 0) data = mem.rss;
@@ -89,15 +77,11 @@ export default function MemoryChart() {
             else if (i === 2) data = mem.heapTotal / 1000;
             else if (i === 3) data = mem.heapUsed / 1000;
             else if (i === 4) data = mem.external / 1000;
-            // console.log('before', chartStyle.datasets[i].data)
+            console.log('before', chartStyle.datasets[i].data)
             chartStyle.datasets[i].data.push(data)
-            
-            // chartStyle.datasets[i].data = [
-            //   ...chartStyle.datasets[i].data, // removed .slice(1) from this line
-            //   data,
-            // ];
+
             displaySize = chartStyle.datasets[i].data.length
-            // console.log('after', displaySize)
+            console.log('after', displaySize)
           }
           const startArray = new Array(displaySize).fill(0);
           lineChart.update();
@@ -232,8 +216,8 @@ export default function MemoryChart() {
       </div>
       <div class="justify-center items-center flex flex-col">
         <RecordData port={port} />
-      </div>
-      <SiegeBar port={port}/>
+      </div> 
+      <SiegeBar />
     </div>
   );
 }
