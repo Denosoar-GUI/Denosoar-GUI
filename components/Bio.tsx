@@ -1,6 +1,6 @@
 import { tw } from "twind";
 
-export default function Bio(props: any) {
+export default function Bio(props: { count: number, name: string, image: string, description: string, github: string, linkedin:string}) {
 
   const BUTTON_STYLE =
     tw`inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-yellow-400 mt-4 bottom-0`;
