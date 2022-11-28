@@ -1,4 +1,4 @@
-export default function RecordData(props: any) {
+export default function RecordData(props: { port: string }) {
   function start() {
     fetch(`http://localhost:${props.port}/start`, {
       mode: "no-cors",
