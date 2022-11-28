@@ -1,6 +1,7 @@
 import Header from "../components/Header.tsx";
 import Bio from "../components/Bio.tsx";
 import { tw } from "twind";
+import { JSXInternal } from "https://esm.sh/v98/preact@10.11.3/src/jsx.d.ts";
 
 export default function About() {
 
@@ -35,7 +36,7 @@ export default function About() {
     ],
   ];
 
-  const bios: any[] = [];
+  const bios: JSXInternal.Element[] = [];
 
   for (let i = 0; i < names.length; i++) {
     bios.push(<Bio count={i} name={names[i][0]} github={names[i][1]} linkedin={names[i][2]} description={names[i][3]} image={names[i][4]} />)
