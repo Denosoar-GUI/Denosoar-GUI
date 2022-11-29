@@ -34,6 +34,7 @@ body {
   width: 75%
 }
 
+
 #about-team {
   background-image: linear-gradient(rgb(179, 230, 179), rgb(179, 230, 179));
 }
@@ -41,10 +42,7 @@ body {
 #docs-body{
   display: grid;
   grid-template-columns: 16rem 1fr 1fr 1fr;
-}
-
-#docs-main{
-  background-image: linear-gradient(white, lightgreen);
+  background-image: linear-gradient(white, rgb(179, 230, 179));
 }
 
 #error-msg {

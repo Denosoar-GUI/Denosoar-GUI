@@ -12,7 +12,7 @@ export default function Docs() {
   ];
   const text = `import { init } from "https://deno.land/x/denosoar@v0.0.4/mod.ts";`
   return (
-    <div>
+    <div id ="docs">
       <Header />
       <div id="docs-body" >
         <aside class="col-span-1" aria-label="Sidebar">
