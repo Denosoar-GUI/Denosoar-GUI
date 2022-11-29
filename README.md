@@ -18,11 +18,12 @@ To disconnect from your server, all you need to do is hit the 'Disconnect' butto
 By default, denosoar.init starts a websocket connection that streams data every 1000ms. To change the sampling frequency, just enter the number (in milliseconds) to the input box provided. Your sampling frequency should update immediately, and you should be able to see a change on your chart.
 
 (Insert a GIF of starting a connection, changing it to 2000ms, and then chaging it to 500ms)
+![A13E1A9E-E166-4F3A-B400-07088F785C55](https://user-images.githubusercontent.com/34800232/204643175-233a2ee4-f1a4-4980-9fe2-2eecbf8f8618.gif)
 
 ### Switching between bar and a line chart.
 
 You can also toggle between displaying bar or a line chart by just toggling the button on the top left of the chart area!
-
+![B99B8175-316D-4F23-A2F4-9EB1545B381F_1_102_o](https://user-images.githubusercontent.com/34800232/204643352-9525f5b1-11c9-4fce-add2-3679ae2efc46.gif)
 
 ### Start and Stop recording
 
@@ -49,7 +50,8 @@ If your backend application is listening for any GET requests at any endpoint, y
   - **Result** : Send 10,000 concurrent GET requests, 5 times a second, for a duration of 10 seconds... 10,000 X 5 X 10 = 250,000 GET requests to your endpoint.
 
  (Insert a GIF of entering a SIEGE command into the GUI)
-   ![Uploading B55691BD-B401-4775-B43D-020CC496837D.gif…]()
+   ![B32C224E-40D4-47B1-92F5-ADB9E431546A](https://user-images.githubusercontent.com/34800232/204643039-a9256c11-e6bd-4317-b052-bb75e5b7645b.gif)
+
 
  ### Uploading a previously generated Denosoar CSV file.
  
