@@ -50,6 +50,7 @@ If your backend application is listening for any GET requests at any endpoint, y
   - **Result** : Send 10,000 concurrent GET requests, 5 times a second, for a duration of 10 seconds... 10,000 X 5 X 10 = 250,000 GET requests to your endpoint.
 
  (Insert a GIF of entering a SIEGE command into the GUI)
+ 
  ![B32C224E-40D4-47B1-92F5-ADB9E431546A](https://user-images.githubusercontent.com/34800232/204643039-a9256c11-e6bd-4317-b052-bb75e5b7645b.gif)
 
 
