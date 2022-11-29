@@ -102,7 +102,7 @@ export default function styles(x: number[] = [], rss: number[] = [], committed: 
     elements: {
       line: {},
       point: {
-        radius: 1
+        radius: 0
       }
     }
   };

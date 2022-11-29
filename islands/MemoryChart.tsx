@@ -208,7 +208,7 @@ export default function MemoryChart() {
         </button>
         <canvas id="myBarChart"></canvas>
       </div>
-      <div class="justify-center items-center flex flex-col">
+      <div class="justify-center items-center flex flex-col mb-3">
         <RecordData port={port} />
       </div> 
       <SiegeBar />
