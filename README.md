@@ -23,7 +23,7 @@ By default, denosoar.init starts a websocket connection that streams data every 
 ### Switching between bar and a line chart.
 
 You can also toggle between displaying bar or a line chart by just toggling the button on the top left of the chart area!
-![B99B8175-316D-4F23-A2F4-9EB1545B381F_1_102_o](https://user-images.githubusercontent.com/34800232/204643352-9525f5b1-11c9-4fce-add2-3679ae2efc46.gif)
+![B1D25806-AF3A-4015-9779-615E70697E43](https://user-images.githubusercontent.com/34800232/204645902-ce43fc1e-36b8-4539-852b-038e638b54c4.gif)
 
 ### Start and Stop recording
 
