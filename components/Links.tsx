@@ -1,5 +1,8 @@
 import { tw } from "twind";
 
+/**
+ * Navigation links.
+ */
 export default function Links() {
   const LINK_STYLE = tw`block mt-4 md:inline-block md:mt-0 hover:text-black flex-none`;
   const NAV_STYLE =
