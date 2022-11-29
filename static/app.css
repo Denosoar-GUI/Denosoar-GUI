@@ -1,3 +1,7 @@
+html{
+  min-width: 900px;
+}
+
 body {
     background: rgb(243 244 246);
   }
@@ -21,7 +25,7 @@ body {
 }
 
 #about-product {
-  background-image: linear-gradient(white, lightgreen);
+  background-image: linear-gradient(white, rgb(179, 230, 179));
 }
 
 #grid_container {
@@ -31,7 +35,7 @@ body {
 }
 
 #about-team {
-  background-image: linear-gradient(lightgreen, rgb(85, 216, 19));
+  background-image: linear-gradient(rgb(179, 230, 179), rgb(179, 230, 179));
 }
 
 #docs-body{

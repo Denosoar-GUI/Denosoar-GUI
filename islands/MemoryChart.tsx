@@ -7,25 +7,30 @@ import styles from "../utils/styles.ts";
 import SiegeBar from "./SiegeBar.tsx";
 
 export default function MemoryChart() {
+  
   const label: number[] = [];
   const [port, setPort] = useState<string>("");
   const [inUse, setInUse] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [frequency, setFrequency] = useState<number>(1000);
 
+  // Set state of port to input value
   const handleChange = (e: Event) => {
     setPort((e.target as HTMLInputElement).value);
   };
 
+  // Set value of inUse and start the new WS connection
   const handleStart = () => {
     if (inUse) return;
     else setInUse(true);
   };
 
+  // Set state of frequency to input value      
   const handleFreqChange = (e: Event) => {
     setFrequency(Number((e.target as HTMLInputElement).value));
   };
 
+  // Send post request to server to change sampling frequency
   const handleTiming = async () => {
     await fetch(`http://localhost:${port}/interval`, {
       method: "POST",
@@ -34,12 +39,12 @@ export default function MemoryChart() {
     });
   };
 
-
-  
-
+  // Define the style and options needed to generate the charts
   const { chartStyle, chartOptions } = styles(label);
   chartOptions.scales.xAxes.title.text = "Data Points";
-  
+
+  // When WebSocket successfully connected, generate new line and bar charts
+  // Process incoming memory usage data streamed from the server, and update both charts accordingly
   useEffect(() => {
     const ctx1 = document.getElementById("myLineChart");
     const ctx2 = document.getElementById("myBarChart");
@@ -53,8 +58,9 @@ export default function MemoryChart() {
       data: chartStyle,
       options: chartOptions,
     });
-    const containerBody = document.getElementById('containerBody');
     
+    // Create a new WebSocket and push the memory data into ChartStyle array to update the chart
+    // When WebSocket closes, clear the interval
     if (inUse) {
       try {
         let myInterval: number;
@@ -65,9 +71,6 @@ export default function MemoryChart() {
         ws.onmessage = (e: MessageEvent) => {
           const mem = JSON.parse(e.data);
           chartStyle.labels.push(chartStyle.labels.length);
-
-          let displaySize = 30;
-
           for (let i = 0; i < 5; i++) {
             let data;
             if (i === 0) data = mem.rss;
@@ -75,24 +78,19 @@ export default function MemoryChart() {
             else if (i === 2) data = mem.heapTotal / 1000;
             else if (i === 3) data = mem.heapUsed / 1000;
             else if (i === 4) data = mem.external / 1000;
-            console.log('before', chartStyle.datasets[i].data)
-            chartStyle.datasets[i].data.push(data)
-
-            displaySize = chartStyle.datasets[i].data.length
-            console.log('after', displaySize)
+            chartStyle.datasets[i].data.push(data);
           }
-          const startArray = new Array(displaySize).fill(0);
           lineChart.update();
           barChart.update();
         };
         ws.onerror = () => {
-          ws.close(1000, "bye");
+          ws.close(1000, 'WebSocket Closed');
           setInUse(false);
           const text =
             `There was an error in connecting this websocket. Please verify the following and try again:\n1) Your server has the denosoar init(port) function included in its entrypoint file.\n2) Your server is currently running.\n3) The port with which you initialized our application is the same port you are now attempting to access.`;
           setError(text);
         };
-        ws.onclose = () => console.log("closed");
+        ws.onclose = () => console.log("WebSocket Closed");
         const closeWS = document.getElementById("closeWS");
         const end = () => {
           ws.close();
@@ -112,6 +110,7 @@ export default function MemoryChart() {
     };
   }, [inUse]);
 
+  // When switching between line chart and bar chart, Will update the classList on the TSX element
   function toggleGraph() {
     const line = document.getElementById("line")?.classList.contains("hidden");
     if (line) {
@@ -123,6 +122,7 @@ export default function MemoryChart() {
     }
   }
 
+  // Turn on or off error message box
   useEffect(() => {
     if (error === "") {
       document.getElementById("error-msg")?.classList.add("hidden");
@@ -184,9 +184,7 @@ export default function MemoryChart() {
       </button>
         </div>
       </div>
-
       
-
       <h1 class="mx-auto text-4xl left-3 pt-10 pb-5 text-center">
         Memory Usage
       </h1>
@@ -196,7 +194,7 @@ export default function MemoryChart() {
           id="barBtn"
           onClick={toggleGraph}
         >
-          Bar Chart
+          View Bar Chart
         </button>
         <canvas id="myLineChart"></canvas>
       </div>
@@ -206,7 +204,7 @@ export default function MemoryChart() {
           id="lineBtn"
           onClick={toggleGraph}
         >
-          Line Chart
+          View Line Chart
         </button>
         <canvas id="myBarChart"></canvas>
       </div>

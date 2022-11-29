@@ -8,7 +8,7 @@ export default function UploadChart(){
     const [dragActive, setDragActive] = useState<boolean>(false);
     const input = useRef<HTMLInputElement>(null)
 
-    // Handles drag event
+    // Set dragActive when user drags a file inside drag and drop box
     const handleDrag = function(e: DragEvent) {
         e.stopPropagation();
         e.preventDefault();
@@ -19,13 +19,13 @@ export default function UploadChart(){
         }
     }
 
-    // Handles drag over event
+    // Added to prevent bubbling when draging files through the input box
     const dragOver = function(e: DragEvent) {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    // Handles drop event
+    // On drop, set the data to the evaluated result of reading the csv file and canecel the drag event
     const handleDrop = async function(e: DragEvent){
         e.preventDefault();
         e.stopPropagation();
@@ -36,7 +36,7 @@ export default function UploadChart(){
         setDragActive(false);
     }
 
-    // Handles change in input 
+    // When importing CSV file with the upload button feature, set data to the evaluated result of reading the csv file
     const handleChange = async function(e: Event){
         const target = e.target as HTMLInputElement;
         e.preventDefault();

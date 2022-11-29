@@ -6,7 +6,6 @@ export default function App({ Component }: AppProps) {
     <>
       <Head>
         <link rel="stylesheet" href="/app.css" />
-        <link rel="icon" href="../components/super-deno.png"/>
       </Head>
       <Component />
     </>

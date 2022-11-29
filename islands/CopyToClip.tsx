@@ -3,23 +3,29 @@ import { useEffect, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import IconCopy from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/copy.tsx";
 import IconChecks from "https://deno.land/x/tabler_icons_tsx@0.0.1/tsx/checks.tsx";
+
+// Copy CLI command into clip
 export default function CopyToClip(
   props: { children: ComponentChildren },
 ) {
+  
   const [copied, setCopied] = useState(false);
   async function handleClick() {
+    //check if there is something to copy
     if (props.children === undefined || props.children === null) {
       return;
     }
-
+    // copy Cpmmand Line and setCopied to true
     try {
       await navigator.clipboard.writeText(props.children.toString());
       setCopied(true);
+      //handle copy error
     } catch (error) {
       setCopied(false);
       console.log((error && error.message) || "copy failed!");
     }
   }
+  // copy text and wait 2 seconds to restore default
   useEffect(() => {
     if (!copied) {
       return;
