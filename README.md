@@ -8,8 +8,8 @@ Denosoar is an open source memory tool that is used to track potential memory le
 ### Connecting / Disconnecting to your application
 After starting the back-end Deno application, and invoking denosoar.init(**PORT#**) from within the application, you will be able to connect to that **PORT** from the [front-end GUI](denosoar.deno.dev). Just type the port number into the input section and click the 'Connect' button. If connected successfully, you should see the data streaming on the Chart.
 
-(Insert a GIF of properly connecting to a listening server)
-![B65881F5-5DFD-463E-8B3C-0B423BF19613_1_102_o](https://user-images.githubusercontent.com/34800232/204636839-58ba0f04-8af6-4c0b-a2fe-40a99e056f0c.jpeg)
+![611B14CD-7E12-4DAF-8004-FB4CF52C4883](https://user-images.githubusercontent.com/34800232/204637697-c2baab21-84bc-4948-abfb-66b7a837a32f.gif)
+
 
 To disconnect from your server, all you need to do is hit the 'Disconnect' button.
 
@@ -22,6 +22,7 @@ By default, denosoar.init starts a websocket connection that streams data every 
 ### Switching between bar and a line chart.
 
 You can also toggle between displaying bar or a line chart by just toggling the button on the top left of the chart area!
+![B99B8175-316D-4F23-A2F4-9EB1545B381F_1_102_o](https://user-images.githubusercontent.com/34800232/204637824-9463672d-3901-4a6d-8bda-354143c77eaa.jpeg)
 
 ### Start and Stop recording
 
@@ -46,9 +47,10 @@ If your backend application is listening for any GET requests at any endpoint, y
   - **Times per Second** : '5'
   - **Duration** : '10'
   - **Result** : Send 10,000 concurrent GET requests, 5 times a second, for a duration of 10 seconds... 10,000 X 5 X 10 = 250,000 GET requests to your endpoint.
-  
+
  (Insert a GIF of entering a SIEGE command into the GUI)
- 
+   ![Uploading B55691BD-B401-4775-B43D-020CC496837D.gif…]()
+
  ### Uploading a previously generated Denosoar CSV file.
  
 If you have a saved CSV file generated from Denosoar, you can choose to display the data with our graphing tool. Just upload or drag and drop any previously generated CSV file into the dropzone, and you should see your data pop up on the chart.
