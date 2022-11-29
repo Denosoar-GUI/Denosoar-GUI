@@ -8,7 +8,8 @@ Denosoar is an open source memory tool that is used to track potential memory le
 ### Connecting / Disconnecting to your application
 After starting the back-end Deno application, and invoking denosoar.init(**PORT#**) from within the application, you will be able to connect to that **PORT** from the [front-end GUI](denosoar.deno.dev). Just type the port number into the input section and click the 'Connect' button. If connected successfully, you should see the data streaming on the Chart.
 
-(Insert a GIF of properly connecting to a listening server)
+![611B14CD-7E12-4DAF-8004-FB4CF52C4883](https://user-images.githubusercontent.com/34800232/204637697-c2baab21-84bc-4948-abfb-66b7a837a32f.gif)
+
 
 To disconnect from your server, all you need to do is hit the 'Disconnect' button.
 
@@ -17,10 +18,12 @@ To disconnect from your server, all you need to do is hit the 'Disconnect' butto
 By default, denosoar.init starts a websocket connection that streams data every 1000ms. To change the sampling frequency, just enter the number (in milliseconds) to the input box provided. Your sampling frequency should update immediately, and you should be able to see a change on your chart.
 
 (Insert a GIF of starting a connection, changing it to 2000ms, and then chaging it to 500ms)
+![A13E1A9E-E166-4F3A-B400-07088F785C55](https://user-images.githubusercontent.com/34800232/204643175-233a2ee4-f1a4-4980-9fe2-2eecbf8f8618.gif)
 
 ### Switching between bar and a line chart.
 
 You can also toggle between displaying bar or a line chart by just toggling the button on the top left of the chart area!
+![B1D25806-AF3A-4015-9779-615E70697E43](https://user-images.githubusercontent.com/34800232/204645902-ce43fc1e-36b8-4539-852b-038e638b54c4.gif)
 
 ### Start and Stop recording
 
@@ -45,9 +48,12 @@ If your backend application is listening for any GET requests at any endpoint, y
   - **Times per Second** : '5'
   - **Duration** : '10'
   - **Result** : Send 10,000 concurrent GET requests, 5 times a second, for a duration of 10 seconds... 10,000 X 5 X 10 = 250,000 GET requests to your endpoint.
-  
+
  (Insert a GIF of entering a SIEGE command into the GUI)
  
+ ![B32C224E-40D4-47B1-92F5-ADB9E431546A](https://user-images.githubusercontent.com/34800232/204643039-a9256c11-e6bd-4317-b052-bb75e5b7645b.gif)
+
+
  ### Uploading a previously generated Denosoar CSV file.
  
 If you have a saved CSV file generated from Denosoar, you can choose to display the data with our graphing tool. Just upload or drag and drop any previously generated CSV file into the dropzone, and you should see your data pop up on the chart.
