@@ -31,7 +31,7 @@ export default function CopyToClip(
   }, [copied]);
 
   return (
-    <div class="bg(gray-800) rounded text-white flex items-center">
+    <div class="mt-3 mb-3 bg(gray-800) rounded text-white flex items-center">
       <pre class="overflow-x-auto flex-1 py-2 px-4">
         {props.children}
       </pre>

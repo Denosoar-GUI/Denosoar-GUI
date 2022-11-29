@@ -14,14 +14,13 @@ export default function Nav(){
     let lastKnownWidth = 0;
     let ticking = false;
     const collapse = (width: number) => {
-      // console.log(width);
       if (width > 768) {
         setNavOpen(true);
       } else {
         setNavOpen(false);
       }
     };
-    const onResize = (e: Event) => {
+    const onResize = () => {
       lastKnownWidth = ref.current.innerWidth;
       if (!ticking) {
         ref.current.requestAnimationFrame(() => {
@@ -44,10 +43,6 @@ export default function Nav(){
         {navOpen ? <Links/> : <></>}
         <MenuButton onClick = {() => {
           setNavOpen( (prev) => {
-            // const title = document.getElementById('denosaur');
-            // console.log(title)
-            // if (!prev) { title?.classList.add('hidden') }
-            // else {title?.classList.remove('hidden')}
             return !prev;
           });
           }

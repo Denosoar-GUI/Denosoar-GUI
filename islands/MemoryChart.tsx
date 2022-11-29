@@ -7,8 +7,6 @@ import styles from "../utils/styles.ts";
 import SiegeBar from "./SiegeBar.tsx";
 
 export default function MemoryChart() {
-  // Number of points to display on the chart
-  
   const label: number[] = [];
   const [port, setPort] = useState<string>("");
   const [inUse, setInUse] = useState<boolean>(false);
@@ -95,7 +93,6 @@ export default function MemoryChart() {
           setError(text);
         };
         ws.onclose = () => console.log("closed");
-        // Add button functionality to close the websocket
         const closeWS = document.getElementById("closeWS");
         const end = () => {
           ws.close();
@@ -117,7 +114,6 @@ export default function MemoryChart() {
 
   function toggleGraph() {
     const line = document.getElementById("line")?.classList.contains("hidden");
-    // console.log(line, "hi");
     if (line) {
       document.getElementById("bar")?.classList.add("class", "hidden");
       document.getElementById("line")?.classList.remove("hidden");

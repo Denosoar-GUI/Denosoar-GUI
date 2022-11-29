@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import Chart from './CsvChart.tsx';
 import readCSV from "../utils/readCSV.ts";
 
