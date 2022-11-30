@@ -4,10 +4,12 @@ import Header from "../components/Header.tsx";
 export default function Csv () {
 
     return(
-        <>
+        <div id="csv-body">
             <Header />
-            <UploadChart/>
-        </>
+            <div>
+                <UploadChart/>
+            </div>
+        </div>
 
     )
 }
