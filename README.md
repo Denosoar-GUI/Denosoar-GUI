@@ -7,6 +7,7 @@ Denosoar is an open source memory tool that is used to track potential memory le
 
 ### Connecting / Disconnecting to your application
 After starting the back-end Deno application, and invoking denosoar.init(**PORT#**) from within the application, you will be able to connect to that **PORT** from the [front-end GUI](denosoar.deno.dev). Just type the port number into the input section and click the 'Connect' button. If connected successfully, you should see the data streaming on the Chart.
+![Connecting](https://user-images.githubusercontent.com/108940347/204691035-5466ba7a-2452-470e-9db5-566955662dd6.gif)
 
 ![611B14CD-7E12-4DAF-8004-FB4CF52C4883](https://user-images.githubusercontent.com/34800232/204637697-c2baab21-84bc-4948-abfb-66b7a837a32f.gif)
 
