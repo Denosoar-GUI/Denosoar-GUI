@@ -10,28 +10,24 @@ export default function About() {
       "Katie Angelopoulos",
       "https://github.com/kangelopoulos",
       "https://www.linkedin.com/in/katharine-angelopoulos-8a69a6174/",
-      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
       'super-deno.png'
     ],
     [
       "David Russo",
       "https://github.com/RussoDavid",
       "https://www.linkedin.com/in/david-russo-742a7735/",
-      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
       "/super-deno.png"
     ],
     [
       "Mohammed Sebbagh",
       "https://github.com/moha99ed",
       "https://www.linkedin.com/in/mohammed-sebbagh/",
-      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
       "/super-deno.png"
     ],
     [
       "Ethan Liu",
       "https://github.com/eliu080893",
       "https://www.linkedin.com/in/ethan-liu-0808/",
-      "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
       "/super-deno.png"
     ],
   ];
@@ -39,7 +35,7 @@ export default function About() {
   const bios: JSXInternal.Element[] = [];
 
   for (let i = 0; i < names.length; i++) {
-    bios.push(<Bio count={i} name={names[i][0]} github={names[i][1]} linkedin={names[i][2]} description={names[i][3]} image={names[i][4]} />)
+    bios.push(<Bio count={i} name={names[i][0]} github={names[i][1]} linkedin={names[i][2]} image={names[i][3]} />)
   }
 
 
@@ -95,8 +91,20 @@ export default function About() {
 
         <h2 class="w-3/4 block mb-4 font-extrabold text-3xl border-b-1 border-green-900 mt-4">Upcoming Features</h2>
         <div id="grid_container">
-          <div class={tw`${FEATURE_STYLE} h-56`} > Heap Snapshots</div>
-          <div class={tw`${FEATUREDES_STYLE}`}>New upcoming feature description here</div>
+          <div class={tw`${FEATURE_STYLE} h-20`} >Heap Snapshots</div>
+          <div class={tw`${FEATUREDES_STYLE}`}>Take and save snapshots of your heap with the click of a button.</div>
+        </div>
+        <div id="grid_container">
+          <div class={tw`${FEATURE_STYLE} h-20`} >Comparative Snapshot Analysis</div>
+          <div class={tw`${FEATUREDES_STYLE}`}>Analyze heap snapshots to pinpoint objects that are likely culprits of memory leaks.</div>
+        </div>
+        <div id="grid_container">
+          <div class={tw`${FEATURE_STYLE} h-20`} >Core Dump Analysis</div>
+          <div class={tw`${FEATUREDES_STYLE}`}>Analyze core dump files after application crashes.</div>
+        </div>
+        <div id="grid_container">
+          <div class={tw`${FEATURE_STYLE} h-20`} >CPU Usage Analysis</div>
+          <div class={tw`${FEATUREDES_STYLE}`}>Analyze the CPU Usage of your application over time and under stress.</div>
         </div>
       </section>
 
