@@ -33,7 +33,7 @@ body {
   animation: glowing 1300ms infinite;
 }
 
-#about-product {
+#about-product, #csv-body{
   background-image: linear-gradient(white, rgb(179, 230, 179));
 }
 
@@ -44,14 +44,20 @@ body {
 }
 
 
-#about-team {
+#about-team{
   background-image: linear-gradient(rgb(179, 230, 179), rgb(179, 230, 179));
 }
-
+#home{
+  background-image: linear-gradient(white, rgb(207, 225, 207));
+}
 #docs-body{
   display: grid;
   grid-template-columns: 16rem 1fr 1fr 1fr;
   background-image: linear-gradient(white, rgb(179, 230, 179));
+}
+
+#csv-body { 
+  background-image: linear-gradient(white, rgb(207, 225, 207));
 }
 
 #error-msg {

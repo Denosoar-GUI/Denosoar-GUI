@@ -6,7 +6,7 @@ import Header from "../components/Header.tsx";
 export default function Home() {
   console.log("hello from Home Export index.tsx");
   return (
-    <div>
+    <div id="home">
       <Header />
       <MemoryChart />
     </div>
