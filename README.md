@@ -31,10 +31,10 @@ Once you have connected, you can save all your incoming data to a CSV file. The 
 
 ### Load test your application
 
-If your backend application is listening for any GET requests at any endpoint, you can choose to load-test your server using our built-in load-testing tool. To do this, just enter the requested information detailed below. (*note* - you will not be able to submit another load-test until the current test has finished.)
+If your backend application is listening for any GET requests at any endpoint, you can choose to load-test your server using our built-in load-testing tool. To do this, just enter the requested information detailed below. **If you are connected to a server and you enter in an incorrect URL endpoint to load-test, the app will attempt to send GET requests to that endpoint.** (*note* - you will not be able to submit another load-test until the current test has finished.) 
 
   *Inputs*
-  - **Endpoint** : Enter the exact URL at which you would like to send GET requests to
+  - **Endpoint** : Enter the exact URL at which you would like to send GET requests to.
   - **Concurrency** : Enter how many GET requests you would like to send at one time.
   - **Times per Second** : Enter how many times per second you would like to send the concurrent requests.
   - **Duration** : Enter how long you would like to test your application for.
