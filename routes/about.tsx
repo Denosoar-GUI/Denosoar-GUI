@@ -10,25 +10,25 @@ export default function About() {
       "Katie Angelopoulos",
       "https://github.com/kangelopoulos",
       "https://www.linkedin.com/in/katharine-angelopoulos-8a69a6174/",
-      'super-deno.png'
+      '/kate.jpeg'
     ],
     [
       "David Russo",
       "https://github.com/RussoDavid",
       "https://www.linkedin.com/in/david-russo-742a7735/",
-      "/super-deno.png"
+      "/david.jpeg"
     ],
     [
       "Mohammed Sebbagh",
       "https://github.com/moha99ed",
       "https://www.linkedin.com/in/mohammed-sebbagh/",
-      "/super-deno.png"
+      "/mo.jpg"
     ],
     [
       "Ethan Liu",
       "https://github.com/eliu080893",
       "https://www.linkedin.com/in/ethan-liu-0808/",
-      "/super-deno.png"
+      "/ethan.jpeg"
     ],
   ];
 
