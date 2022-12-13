@@ -3,12 +3,13 @@ import { JSX } from 'preact';
 /**
  * A clickable menu button that either opens or collapses the Nav component.
  */
-export default function MenuButton(props: { onClick: JSX.HTMLAttributes<HTMLButtonElement>, seen: boolean}) {
+type func = () => void;
+export default function MenuButton(props: { handleClick: func, seen: boolean}) {
   if(props.seen){
     return(
       <button
         class="flex items-center px-3 py-2 border rounded text-black hover:border-yellow-400 hover:bg-gray-400 focus:outline-none"
-        onClick={props.onClick}
+        onClick={props.handleClick}
       >
       <svg
         class="fill-current h-3 w-3"

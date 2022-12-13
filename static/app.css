@@ -10,7 +10,8 @@ body {
   border-width: 7px;
   border-style: solid;
   border-image: repeating-linear-gradient(45deg, black, yellow 2.5%) 10;
-  background-color: LIGHTGREEN;
+  background-color: #46d197;
+
   
 }
 
@@ -33,8 +34,8 @@ body {
   animation: glowing 1300ms infinite;
 }
 
-#about-product, #csv-body{
-  background-image: linear-gradient(white, rgb(179, 230, 179));
+#csv-body{
+  background-image: linear-gradient(white, #ddf6fa);
 }
 
 #grid_container {
@@ -44,20 +45,18 @@ body {
 }
 
 
-#about-team{
-  background-image: linear-gradient(rgb(179, 230, 179), rgb(179, 230, 179));
-}
-#home{
-  background-image: linear-gradient(white, rgb(207, 225, 207));
+
+#home, #about-page{
+  background-image: linear-gradient(white, #ddf6fa);
 }
 #docs-body{
   display: grid;
   grid-template-columns: 16rem 1fr 1fr 1fr;
-  background-image: linear-gradient(white, rgb(179, 230, 179));
+  background-image: linear-gradient(white, #ddf6fa);
 }
 
 #csv-body { 
-  background-image: linear-gradient(white, rgb(207, 225, 207));
+  background-image: linear-gradient(white, #ddf6fa);
 }
 
 #error-msg {

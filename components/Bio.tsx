@@ -1,5 +1,6 @@
 import { tw } from "twind";
 
+
 export default function Bio(props: { count: number, name: string, image: string, github: string, linkedin:string}) {
 
   const BUTTON_STYLE =
@@ -7,7 +8,7 @@ export default function Bio(props: { count: number, name: string, image: string,
     
   if (props.count % 2 !== 1) {
     return (
-      <div class="flex flex-col justify-center min-w-600 w-2/5 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-3xl py-1 items-center">
+    <div class="flex shadow-xl flex-col justify-center min-w-[600px] w-2/5 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-3xl py-1 items-center">
     <div class = "w-11/12 flex flex-row items-center justify-around">
     <section class="flex-1 text-center py-2">
         <img
@@ -17,8 +18,8 @@ export default function Bio(props: { count: number, name: string, image: string,
 
       </section>
       <section class="flex-1 text-center py-2 relative">
-        <div class="flex-1 items-center justify-center min-w-200">
-        <h2 class="section-title self-">{props.name}</h2>
+        <div class="flex-1 items-center justify-center min-w-[200px]">
+        <h2 class="section-title">{props.name}</h2>
         <p>Software Engineer</p>
           <a
             href={props.github}
@@ -52,11 +53,11 @@ export default function Bio(props: { count: number, name: string, image: string,
   } 
 
   return (
-  <div class="flex flex-col justify-center min-w-600 w-2/5 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-3xl py-1 items-center">
+  <div class="flex flex-col shadow-xl justify-center min-w-[600px] w-2/5 bg-gray-100 h-72 mx-auto mb-5 border-gray-500 border-solid border-8 rounded-3xl py-1 items-center">
     <div class = "w-11/12 flex flex-row items-center justify-around">
       <section class="flex-1 text-center py-2 relative">
-        <div class="flex-1 items-center justify-center min-w-200">
-        <h2 class="section-title self-">{props.name}</h2>
+        <div class="flex-1 items-center justify-center min-w-[200px]">
+        <h2 class="section-title">{props.name}</h2>
         <p>Software Engineer</p>
           <a
             href={props.github}

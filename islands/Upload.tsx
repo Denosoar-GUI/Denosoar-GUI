@@ -48,13 +48,13 @@ export default function UploadChart(){
     }
 
     return(
-        <div>
+        <div class="bg-white pl-10 pr-10 w-4/5 mx-auto min-w-[800px] max-w-6xl pt-10 pb-10 shadow-md">
             <form onSubmit={e => e.preventDefault()} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={dragOver} onDrop={handleDrop} class='h-full text-center mb-4' id='upload-csv'>
                 <input class='hidden' ref={input} type='file' multiple={true} onChange={handleChange}/>
                 <label htmlFor='upload-csv' id='drag-active'>
                     <div> 
                         <p>Drag and drop your csv file here</p>
-                        <button class='p-1 border-2 border-black' onClick={() => input.current?.click()}>Upload Chart</button>
+                        <button class='p-1 border-2 border-black max-w-screen-md' onClick={() => input.current?.click()}>Upload Chart</button>
                     </div>
                 </label>
             </form>

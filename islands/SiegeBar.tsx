@@ -22,7 +22,8 @@ export default function SiegeBar() {
     async function handleClick(e: Event) {
 
         // Check if all the fields are inputted correctly.
-        const isFormValid = document.getElementById('siege-bar')?.checkValidity();
+        const node: HTMLFormElement | null = document.querySelector('form[id=\'siege-bar\'');
+        const isFormValid = node?.checkValidity();
 
         if (isFormValid) {
             e.preventDefault();

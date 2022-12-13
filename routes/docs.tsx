@@ -1,5 +1,7 @@
 import Header from "../components/Header.tsx";
 import CopyToClip from "../islands/CopyToClip.tsx";
+import Filler from "../components/Filler.tsx";
+
 
 export default function Docs() {
   const children = [
@@ -15,8 +17,10 @@ export default function Docs() {
   ];
   const text = `import { init } from "https://deno.land/x/denosoar@v0.0.4/mod.ts";`
   return (
+
     <div id ="docs">
       <Header />
+      <Filler />
       <div id="docs-body" >
         <aside id="sidebarDocs" class="col-span-1" aria-label="Sidebar">
           <div
