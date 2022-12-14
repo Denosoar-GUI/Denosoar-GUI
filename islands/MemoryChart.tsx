@@ -133,7 +133,7 @@ export default function MemoryChart() {
 
   return (
     <div
-      class="bg-white pl-10 pr-10 w-4/5 mx-auto min-w-800 max-w-6xl pt-10 pb-10 shadow-md"
+      class="bg-white pl-10 pr-10 w-4/5 mx-auto min-w-[800px] max-w-6xl pt-10 pb-10 shadow-md"
       id="chartContainer"
     >
       <div class="">
@@ -188,7 +188,7 @@ export default function MemoryChart() {
           </button>
           <div
             id="error-msg"
-            class="text-red-500 absolute text-sm w-130xl hidden px-1 py-1 rounded top-0 h-155xl"
+            class="text-red-500 absolute text-sm w-[130xl] hidden px-1 py-1 rounded top-0 h-[155xl]"
             onClick={() => setError("")}
           >
             {error}
