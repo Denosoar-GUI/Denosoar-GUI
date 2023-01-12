@@ -51,6 +51,6 @@ If your backend application is listening for any GET requests at any endpoint, y
 
  ### Uploading a previously generated Denosoar CSV file.
  
-If you have a saved CSV file generated from Denosoar, you can choose to display the data with our graphing tool. Just upload or drag and drop any previously generated CSV file into the dropzone, and you should see your data pop up on the chart.
+If you have a saved CSV file generated from Denosoar, you can choose to display the data with our graphing tool. Just upload or drag and drop any previously generated CSV file into the dropzone, and you should see your data pop up on the chart!
   
   
