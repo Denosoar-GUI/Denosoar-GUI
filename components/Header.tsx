@@ -3,7 +3,7 @@ import Logo from './Logo.tsx';
 
 /**
  * Header; handles collapsing of the Nav component on resize. 
- * Contains components: Nav, Logo, MenuButton.
+ * Contains components: Nav, Logo, MenuButton, and link to Github repos.
  */
 export default function Header() {
 
