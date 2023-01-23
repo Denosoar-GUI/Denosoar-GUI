@@ -2,8 +2,8 @@ import Nav from '../islands/Nav.tsx';
 import Logo from './Logo.tsx';
 
 /**
- * Header; handles collapsing of the Nav component on resize. 
- * Contains components: Nav, Logo, MenuButton, Github links.
+ * Header -- handles collapsing of the Nav component on resize. 
+ * Contains components: Nav, Logo, MenuButton
  */
 export default function Header() {
 
