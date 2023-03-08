@@ -19,7 +19,7 @@ export default function About() {
       "/david.jpeg"
     ],
     [
-      "Mohammed Sebbagh",
+      "Mo Sebbagh",
       "https://github.com/moha99ed",
       "https://www.linkedin.com/in/mohammed-sebbagh/",
       "/mo.jpg"

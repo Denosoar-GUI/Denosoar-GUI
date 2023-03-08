@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "preact/hooks";
 import MenuButton from "../components/MenuButton.tsx";
 import Links from "../components/Links.tsx";
@@ -48,8 +47,11 @@ export default function Nav() {
 
   return (
     <div class="flex flex-row justify-between items-center overflow-hidden">
-      {navOpen ? <Links /> : <></>}
-      <MenuButton seen={seeButton} handleClick={() => setNavOpen(!navOpen)} />
+      {seeButton ? (
+        <MenuButton seen={seeButton} handleClick={() => setNavOpen(!navOpen)} />
+      ) : (
+        <Links visible={navOpen} />
+      )}
     </div>
-  )
+  );
 }
