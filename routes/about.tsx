@@ -21,7 +21,7 @@ export default function About() {
     [
       "Mo Sebbagh",
       "https://github.com/moha99ed",
-      "https://www.linkedin.com/in/mohammed-sebbagh/",
+      "https://www.linkedin.com/in/m-sebbagh/",
       "/mo.jpg"
     ],
     [
