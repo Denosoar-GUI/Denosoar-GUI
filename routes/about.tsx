@@ -20,9 +20,9 @@ export default function About() {
       "/super-deno.png"
     ],
     [
-      "Mohammed Sebbagh",
+      "Mo Sebbagh",
       "https://github.com/moha99ed",
-      "https://www.linkedin.com/in/mohammed-sebbagh/",
+      "https://www.linkedin.com/in/m-sebbagh/",
       "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
       "/super-deno.png"
     ],
