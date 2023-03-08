@@ -4,9 +4,9 @@ import styles  from '../utils/styles.ts';
 
  export default function Chart(props: { data: [string, number[]][] }) {
   useEffect(() => {
+    // Takes the data processed from a .csv file and saves it to variables so that it can be used to create charts
     let x, rss, committed, heapTotal, heapUsed, external: number[] = [];
     for(let i = 0; i < props.data.length; i++){
-      console.log('in the for loop');
       switch(props.data[i][0]){
         case 'x': x = props.data[i][1]; break;
         case 'rss': rss = props.data[i][1]; break;
@@ -15,27 +15,27 @@ import styles  from '../utils/styles.ts';
         case 'heapUsed': heapUsed = props.data[i][1]; break;
         case 'external': external = props.data[i][1]; break;
         default: 
-          console.log('default');
+          // If this isn't a denosoar csv file, it will not be parsed. 
           throw new Error('Please check your csv columns. Your columns must be named x, rss, commmitted, heapTotal, heapUsed, and external.')
       }
     }
+    // Create the charts by invoking styles to add data sets to a set of pre-existing chart.js styles
     const { chartStyle, chartOptions } = styles(x, rss, committed, heapTotal, heapUsed, external);
-    console.log(x, rss);
     const ctx1 = document.getElementById("myCsvChart");
     const lineChart = new chartjs.Chart(ctx1, {
       type: "line",
       data: chartStyle,
       options: chartOptions,
     });
+    // Destroy the chart when the island refreshes
     return () => {
-      console.log('I should not be here')
       lineChart.destroy();
     }
   }, [props.data]);
 
-  return(
-    <div id = "csv" class='w-4/5 mx-auto min-w-800 max-w-6xl pt-10 pb-10'>
-      <div id="line" class="border-2 border-solid border-gray-300 p-4 ">
+  return (
+    <div id = "csv" class='mx-auto max-w-6xl pt-10 pb-10'>
+      <div id="line" class="border-2 border-solid border-gray-300 p-4">
           <canvas id="myCsvChart"></canvas>
       </div>
     </div>

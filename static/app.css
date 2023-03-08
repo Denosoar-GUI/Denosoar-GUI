@@ -1,109 +1,111 @@
+html{
+  min-width: 900px;
+}
+
 body {
     background: rgb(243 244 246);
-    /* background: black; */
   }
 
-  h1 {
-    /* font-family: 'Courier New', Courier, monospace; */
-    /* color: blue; */
+#siege-bar {
+  border-width: 7px;
+  border-style: solid;
+  border-image: repeating-linear-gradient(45deg, black, yellow 2.5%) 10;
+  background-color: #46d197;
+
+  
+}
+
+#sidebarDocs{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.link{
+  color: blue;
+}
+.section-title {
+  font-size: 24px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-weight: 600;
+}
+.glowing {
+  animation: glowing 1300ms infinite;
+}
+
+#csv-body{
+  background-image: linear-gradient(white, #ddf6fa);
+}
+
+#grid_container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 75%
+}
+
+
+
+#home, #about-page{
+  background-image: linear-gradient(white, #ddf6fa);
+}
+#docs-body{
+  display: grid;
+  grid-template-columns: 16rem 1fr 1fr 1fr;
+  background-image: linear-gradient(white, #ddf6fa);
+}
+
+#csv-body { 
+  background-image: linear-gradient(white, #ddf6fa);
+}
+
+#error-msg {
+  background-color: lightgoldenrodyellow;
+  border: 1px solid orange;
+  display: hidden;
+  left: -15%
+}
+
+#upload-csv {
+  width: 100%;
+  height: 20%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  
+}
+
+#drag-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed rgb(228, 90, 88);
+  height: 10rem;
+  width: 75%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* The below styling is to remove the scroll bar for inputs of type number*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+@keyframes glowing {
+  0% {
+    background-color: #eb6767;
+    box-shadow: 0 0 5px #2ba805;
   }
-
-  /* #nav_logo {
-    flex: 1 0 auto;
-  } */
-
-  #siege-bar {
-    border-width: 7px;
-    border-style: solid;
-    border-image: repeating-linear-gradient(45deg, black, yellow 2.5%) 10;
-    background-color: LIGHTGREEN;
-    
+  50% {
+    background-color: #e81919;
+    box-shadow: 0 0 20px #49e819;
   }
-
-  .glowing {
-    animation: glowing 1300ms infinite;
+  100% {
+    background-color: #eb6767;
+    box-shadow: 0 0 5px #2ba805;
   }
-
-  #about-product {
-    background-image: linear-gradient(white, lightgreen);
-  }
-
-  #grid_container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    width: 75%
-  }
-
-  #about-team {
-    background-image: linear-gradient(lightgreen, rgb(85, 216, 19));
-  }
-
-  #docs-body{
-    display: grid;
-    grid-template-columns: 16rem 1fr 1fr 1fr;
-  }
-
-  #docs-main{
-    background-image: linear-gradient(white, lightgreen);
-  }
-
-  #error-msg {
-    background-color: lightgoldenrodyellow;
-    border: 1px solid orange;
-    display: hidden;
-    left: -15%
-  }
-
-  #upload-csv {
-    width: 100%;
-    height: 20%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    
-  }
-
-  #drag-active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed rgb(228, 90, 88);
-    height: 10rem;
-    width: 75%;
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  /* The below styling is to remove the scroll bar for inputs of type number*/
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button { 
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      margin: 0; 
-  }
-
-  /* Used to define the animation for the glowing of siege bar*/
-  @keyframes glowing {
-    0% {
-      background-color: #eb6767;
-      box-shadow: 0 0 5px #2ba805;
-    }
-    50% {
-      background-color: #e81919;
-      box-shadow: 0 0 20px #49e819;
-    }
-    100% {
-      background-color: #eb6767;
-      box-shadow: 0 0 5px #2ba805;
-    }
-  }
-
-  /* #csv {
-    display: flex;
-    justify-content: center;
-    width: 750px;
-  } */
-   /*class='h-full flex items-center justify-center border-dotted border-2 border-red-200 rounded m-10 p-10'
-
-   
+}

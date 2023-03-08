@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import Chart from './CsvChart.tsx';
 import readCSV from "../utils/readCSV.ts";
 
@@ -8,7 +8,7 @@ export default function UploadChart(){
     const [dragActive, setDragActive] = useState<boolean>(false);
     const input = useRef<HTMLInputElement>(null)
 
-    // Handles drag event
+    // Set dragActive when user drags a file inside drag and drop box
     const handleDrag = function(e: DragEvent) {
         e.stopPropagation();
         e.preventDefault();
@@ -19,13 +19,13 @@ export default function UploadChart(){
         }
     }
 
-    // Handles drag over event
+    // Added to prevent bubbling when draging files through the input box
     const dragOver = function(e: DragEvent) {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    // Handles drop event
+    // On drop, set the data to the evaluated result of reading the csv file and canecel the drag event
     const handleDrop = async function(e: DragEvent){
         e.preventDefault();
         e.stopPropagation();
@@ -36,7 +36,7 @@ export default function UploadChart(){
         setDragActive(false);
     }
 
-    // Handles change in input 
+    // When importing CSV file with the upload button feature, set data to the evaluated result of reading the csv file
     const handleChange = async function(e: Event){
         const target = e.target as HTMLInputElement;
         e.preventDefault();
@@ -48,13 +48,14 @@ export default function UploadChart(){
     }
 
     return(
-        <div>
+        <div class="bg-white pl-10 pr-10 w-4/5 mx-auto min-w-[800px] max-w-6xl pt-10 pb-10 shadow-md">
+            <h1 class="mx-auto text-4xl left-3 pb-5 text-center">Upload a Chart</h1>
             <form onSubmit={e => e.preventDefault()} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={dragOver} onDrop={handleDrop} class='h-full text-center mb-4' id='upload-csv'>
                 <input class='hidden' ref={input} type='file' multiple={true} onChange={handleChange}/>
                 <label htmlFor='upload-csv' id='drag-active'>
                     <div> 
                         <p>Drag and drop your csv file here</p>
-                        <button class='p-1 border-2 border-black' onClick={() => input.current?.click()}>Upload Chart</button>
+                        <button class='p-1 border-2 border-black max-w-screen-md' onClick={() => input.current?.click()}>Upload Chart</button>
                     </div>
                 </label>
             </form>
